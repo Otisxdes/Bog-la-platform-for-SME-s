@@ -31,8 +31,14 @@ export default function HomePage() {
           {/* Action Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
-              href="/checkout-links"
+              href="/login"
               className="px-8 py-4 bg-blue-600 text-white rounded-lg font-semibold text-lg hover:bg-blue-700 transition-colors shadow-lg"
+            >
+              Войти (Login)
+            </Link>
+            <Link
+              href="/checkout-links"
+              className="px-8 py-4 bg-white text-blue-600 border-2 border-blue-600 rounded-lg font-semibold text-lg hover:bg-blue-50 transition-colors"
             >
               {t('manageLinks')}
             </Link>
