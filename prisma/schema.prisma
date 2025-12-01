@@ -1,0 +1,103 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Seller {
+  id           String   @id @default(cuid())
+  name         String
+  slug         String   @unique
+  email        String   @unique
+  password     String   // hashed password for auth
+  instagramUrl String?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  checkoutLinks CheckoutLink[]
+  customers     Customer[]
+  orders        Order[]
+}
+
+model CheckoutLink {
+  id            String   @id @default(cuid())
+  sellerId      String
+  seller        Seller   @relation(fields: [sellerId], references: [id], onDelete: Cascade)
+  name          String
+  slug          String
+  price         Int
+  currency      String   @default("UZS")
+  defaultQty    Int      @default(1)
+  maxQty        Int?
+  imageUrl      String?
+  sizes         String   @default("[]") // JSON string array: ["S", "M", "L", "XL"]
+
+  deliveryOptions String // JSON string: { "courierCity": true, "pickup": true, "region": false }
+  paymentNote    String
+
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  orders         Order[]
+
+  @@unique([sellerId, slug])
+  @@index([slug])
+}
+
+model Customer {
+  id             String    @id @default(cuid())
+  sellerId       String
+  seller         Seller    @relation(fields: [sellerId], references: [id], onDelete: Cascade)
+
+  fullName       String
+  phone          String
+  city           String?
+  address        String?
+  username       String?
+
+  marketingOptIn Boolean   @default(false)
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+  lastUsedAt     DateTime?
+
+  orders         Order[]
+
+  @@unique([sellerId, phone])
+  @@index([sellerId, phone])
+}
+
+model Order {
+  id              String        @id @default(cuid())
+  sellerId        String
+  seller          Seller        @relation(fields: [sellerId], references: [id], onDelete: Cascade)
+
+  checkoutLinkId  String
+  checkoutLink    CheckoutLink  @relation(fields: [checkoutLinkId], references: [id], onDelete: Cascade)
+
+  customerId      String?
+  customer        Customer?     @relation(fields: [customerId], references: [id], onDelete: SetNull)
+
+  quantity        Int           @default(1)
+  totalPrice       Int
+  selectedSize    String        @default("") // The size selected by the buyer
+
+  contactSnapshot String        // JSON string: { fullName, phone, city, address, username }
+
+  deliveryMethod  String
+  paymentStatus   String        @default("new")        // "new" | "paid" | "cancelled"
+  deliveryStatus  String        @default("pending")    // "pending" | "sent" | "delivered"
+
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+
+  @@index([sellerId])
+  @@index([checkoutLinkId])
+  @@index([customerId])
+}
+

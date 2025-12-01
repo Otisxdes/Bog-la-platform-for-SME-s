@@ -1,0 +1,159 @@
+{
+  "common": {
+    "language": "Til",
+    "cancel": "Bekor qilish",
+    "save": "Saqlash",
+    "delete": "O'chirish",
+    "edit": "Tahrirlash",
+    "back": "Orqaga",
+    "loading": "Yuklanmoqda...",
+    "error": "Xato",
+    "success": "Muvaffaqiyatli"
+  },
+  "home": {
+    "title": "Bog'la for SME's",
+    "subtitle": "Kichik va o'rta biznes uchun to'lov havolalari yaratish va buyurtmalarni boshqarish platformasi",
+    "manageLinks": "Havolalarni boshqarish",
+    "viewOrders": "Buyurtmalarni ko'rish",
+    "features": {
+      "paymentLinks": {
+        "title": "To'lov havolalari",
+        "description": "Har bir mahsulot uchun shaxsiy havolalar yarating"
+      },
+      "orderManagement": {
+        "title": "Buyurtmalarni boshqarish",
+        "description": "Barcha buyurtmalarni bir joyda kuzatib boring"
+      },
+      "sizeCustomization": {
+        "title": "O'lchamlarni sozlash",
+        "description": "Har bir mahsulot uchun ko'p o'lchamlar qo'shing"
+      }
+    },
+    "footer": "Barcha huquqlar himoyalangan"
+  },
+  "checkoutLinks": {
+    "title": "To'lov havolalari",
+    "newButton": "Yangi havola",
+    "noLinks": "Hali to'lov havolalari yo'q. Birinchisini yarating!",
+    "table": {
+      "name": "Nomi",
+      "sizes": "O'lchamlar",
+      "url": "URL",
+      "createdDate": "Yaratilgan sana",
+      "ordersCount": "Buyurtmalar soni"
+    },
+    "create": {
+      "title": "To'lov havolasini yaratish",
+      "productName": "Mahsulot nomi",
+      "productNamePlaceholder": "Masalan: Yozgi futbolka",
+      "size": "O'lcham",
+      "sizePlaceholder": "Masalan: S, M, L, XL",
+      "productImage": "Mahsulot rasmi",
+      "productImagePlaceholder": "https://example.com/image.jpg",
+      "productImageHelp": "Mahsulot rasmiga havola joylashtiring",
+      "price": "Narx",
+      "currency": "Valyuta",
+      "defaultQty": "Standart miqdor",
+      "maxQty": "Maksimal miqdor",
+      "deliveryOptions": "Yetkazib berish variantlari",
+      "courierCity": "Shahar bo'ylab kuryer",
+      "pickup": "O'zim olib ketaman",
+      "regionDelivery": "Viloyatlarga yetkazib berish",
+      "deliveryError": "Kamida bitta yetkazib berish variantini tanlang",
+      "paymentNote": "To'lov bo'yicha ko'rsatmalar",
+      "paymentNotePlaceholder": "Xaridor qanday to'lashi kerakligini tavsiflang...",
+      "submit": "Havola yaratish",
+      "submitting": "Yaratilmoqda..."
+    }
+  },
+  "orders": {
+    "title": "Buyurtmalar",
+    "noOrders": "Hali buyurtmalar yo'q",
+    "table": {
+      "time": "Vaqt",
+      "buyerName": "Xaridor ismi",
+      "product": "Mahsulot",
+      "size": "O'lcham",
+      "paymentStatus": "To'lov holati",
+      "deliveryStatus": "Yetkazib berish holati",
+      "actions": "Harakatlar",
+      "view": "Ko'rish"
+    },
+    "details": {
+      "title": "Buyurtma tafsilotlari",
+      "orderInfo": "Buyurtma haqida ma'lumot",
+      "orderNumber": "Buyurtma raqami",
+      "createdAt": "Yaratilgan",
+      "product": "Mahsulot",
+      "quantity": "Miqdor",
+      "totalPrice": "Umumiy narx",
+      "buyerInfo": "Xaridor haqida ma'lumot",
+      "fullName": "To'liq ism",
+      "phone": "Telefon",
+      "telegram": "Telegram",
+      "city": "Shahar",
+      "address": "Manzil",
+      "deliveryMethod": "Yetkazib berish usuli",
+      "statuses": "Holatlar",
+      "paymentStatus": "To'lov holati",
+      "deliveryStatus": "Yetkazib berish holati",
+      "updateStatus": "Holatni yangilash",
+      "paymentStatuses": {
+        "pending": "Kutilmoqda",
+        "paid": "To'langan",
+        "cancelled": "Bekor qilingan"
+      },
+      "deliveryStatuses": {
+        "pending": "Kutilmoqda",
+        "sent": "Yuborilgan",
+        "delivered": "Yetkazilgan"
+      }
+    }
+  },
+  "buyer": {
+    "checkout": {
+      "title": "Buyurtmani rasmiylashtirish",
+      "productDetails": "Mahsulot tafsilotlari",
+      "price": "Narx",
+      "selectSize": "O'lchamni tanlang",
+      "quantity": "Miqdor",
+      "deliveryMethod": "Yetkazib berish usuli",
+      "courierCity": "Shahar bo'ylab kuryer",
+      "pickup": "O'zim olib ketaman",
+      "regionDelivery": "Viloyatlarga yetkazib berish",
+      "contactInfo": "Aloqa ma'lumotlari",
+      "fullName": "To'liq ism",
+      "fullNamePlaceholder": "To'liq ismingizni kiriting",
+      "phone": "Telefon raqami",
+      "phonePlaceholder": "+998XXXXXXXXX",
+      "telegram": "Telegram username (ixtiyoriy)",
+      "telegramPlaceholder": "@username",
+      "city": "Shahar",
+      "selectCity": "Shaharni tanlang",
+      "address": "Yetkazib berish manzili",
+      "addressPlaceholder": "To'liq manzilni kiriting",
+      "paymentInstructions": "To'lov bo'yicha ko'rsatmalar",
+      "totalPrice": "Jami to'lov",
+      "submit": "Buyurtma berish",
+      "submitting": "Yuborilmoqda...",
+      "saveDetails": "Ma'lumotlarni keyingi safar uchun saqlash?",
+      "saveYes": "Ha, saqlash",
+      "saveNo": "Yo'q",
+      "useSavedDetails": "Saqlangan ma'lumotlardan foydalanish",
+      "clearSavedDetails": "Tozalash",
+      "errors": {
+        "loadFailed": "To'lov sahifasini yuklashda xatolik",
+        "fullNameRequired": "To'liq ism majburiy",
+        "phoneInvalid": "Noto'g'ri O'zbekiston telefon raqami formati (+998XXXXXXXXX)",
+        "cityRequired": "Shahar majburiy",
+        "addressRequired": "Manzil majburiy",
+        "sizeRequired": "Iltimos, o'lchamni tanlang",
+        "deliveryRequired": "Yetkazib berish usuli majburiy"
+      },
+      "success": {
+        "title": "Buyurtma muvaffaqiyatli rasmiylashtirildi!",
+        "message": "Buyurtmangiz uchun rahmat. Sotuvchi tez orada siz bilan bog'lanadi."
+      }
+    }
+  }
+}

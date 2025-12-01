@@ -1,0 +1,159 @@
+{
+  "common": {
+    "language": "Язык",
+    "cancel": "Отмена",
+    "save": "Сохранить",
+    "delete": "Удалить",
+    "edit": "Редактировать",
+    "back": "Назад",
+    "loading": "Загрузка...",
+    "error": "Ошибка",
+    "success": "Успешно"
+  },
+  "home": {
+    "title": "Bog'la for SME's",
+    "subtitle": "Простая платформа для создания платежных ссылок и управления заказами для малого и среднего бизнеса",
+    "manageLinks": "Управление ссылками",
+    "viewOrders": "Посмотреть заказы",
+    "features": {
+      "paymentLinks": {
+        "title": "Платежные ссылки",
+        "description": "Создавайте персонализированные ссылки для каждого продукта"
+      },
+      "orderManagement": {
+        "title": "Управление заказами",
+        "description": "Отслеживайте все заказы в одном месте"
+      },
+      "sizeCustomization": {
+        "title": "Настройка размеров",
+        "description": "Добавляйте множество размеров для каждого товара"
+      }
+    },
+    "footer": "Все права защищены"
+  },
+  "checkoutLinks": {
+    "title": "Ссылки на оплату",
+    "newButton": "Новая ссылка",
+    "noLinks": "Пока нет ссылок на оплату. Создайте первую!",
+    "table": {
+      "name": "Название",
+      "sizes": "Размеры",
+      "url": "URL",
+      "createdDate": "Дата создания",
+      "ordersCount": "Количество заказов"
+    },
+    "create": {
+      "title": "Создать ссылку на оплату",
+      "productName": "Название товара",
+      "productNamePlaceholder": "Например: Летняя футболка",
+      "size": "Размер",
+      "sizePlaceholder": "Например: S, M, L, XL",
+      "productImage": "Изображение товара",
+      "productImagePlaceholder": "https://example.com/image.jpg",
+      "productImageHelp": "Вставьте ссылку на изображение товара",
+      "price": "Цена",
+      "currency": "Валюта",
+      "defaultQty": "Количество по умолчанию",
+      "maxQty": "Максимальное количество",
+      "deliveryOptions": "Варианты доставки",
+      "courierCity": "Курьер по городу",
+      "pickup": "Самовывоз",
+      "regionDelivery": "Доставка по регионам",
+      "deliveryError": "Выберите хотя бы один вариант доставки",
+      "paymentNote": "Инструкции по оплате",
+      "paymentNotePlaceholder": "Опишите, как покупатель должен оплатить...",
+      "submit": "Создать ссылку",
+      "submitting": "Создание..."
+    }
+  },
+  "orders": {
+    "title": "Заказы",
+    "noOrders": "Заказов пока нет",
+    "table": {
+      "time": "Время",
+      "buyerName": "Имя покупателя",
+      "product": "Товар",
+      "size": "Размер",
+      "paymentStatus": "Статус оплаты",
+      "deliveryStatus": "Статус доставки",
+      "actions": "Действия",
+      "view": "Просмотр"
+    },
+    "details": {
+      "title": "Детали заказа",
+      "orderInfo": "Информация о заказе",
+      "orderNumber": "Номер заказа",
+      "createdAt": "Создан",
+      "product": "Товар",
+      "quantity": "Количество",
+      "totalPrice": "Общая цена",
+      "buyerInfo": "Информация о покупателе",
+      "fullName": "Полное имя",
+      "phone": "Телефон",
+      "telegram": "Telegram",
+      "city": "Город",
+      "address": "Адрес",
+      "deliveryMethod": "Способ доставки",
+      "statuses": "Статусы",
+      "paymentStatus": "Статус оплаты",
+      "deliveryStatus": "Статус доставки",
+      "updateStatus": "Обновить статус",
+      "paymentStatuses": {
+        "pending": "Ожидание",
+        "paid": "Оплачено",
+        "cancelled": "Отменено"
+      },
+      "deliveryStatuses": {
+        "pending": "Ожидание",
+        "sent": "Отправлено",
+        "delivered": "Доставлено"
+      }
+    }
+  },
+  "buyer": {
+    "checkout": {
+      "title": "Оформление заказа",
+      "productDetails": "Детали товара",
+      "price": "Цена",
+      "selectSize": "Выберите размер",
+      "quantity": "Количество",
+      "deliveryMethod": "Способ доставки",
+      "courierCity": "Курьер по городу",
+      "pickup": "Самовывоз",
+      "regionDelivery": "Доставка по регионам",
+      "contactInfo": "Контактная информация",
+      "fullName": "Полное имя",
+      "fullNamePlaceholder": "Введите ваше полное имя",
+      "phone": "Номер телефона",
+      "phonePlaceholder": "+998XXXXXXXXX",
+      "telegram": "Telegram username (необязательно)",
+      "telegramPlaceholder": "@username",
+      "city": "Город",
+      "selectCity": "Выберите город",
+      "address": "Адрес доставки",
+      "addressPlaceholder": "Введите полный адрес",
+      "paymentInstructions": "Инструкции по оплате",
+      "totalPrice": "Итого к оплате",
+      "submit": "Оформить заказ",
+      "submitting": "Отправка...",
+      "saveDetails": "Сохранить данные для следующего раза?",
+      "saveYes": "Да, сохранить",
+      "saveNo": "Нет",
+      "useSavedDetails": "Использовать сохраненные данные",
+      "clearSavedDetails": "Очистить",
+      "errors": {
+        "loadFailed": "Не удалось загрузить страницу оплаты",
+        "fullNameRequired": "Полное имя обязательно",
+        "phoneInvalid": "Неверный формат узбекского номера телефона (+998XXXXXXXXX)",
+        "cityRequired": "Город обязателен",
+        "addressRequired": "Адрес обязателен",
+        "sizeRequired": "Пожалуйста, выберите размер",
+        "deliveryRequired": "Способ доставки обязателен"
+      },
+      "success": {
+        "title": "Заказ успешно оформлен!",
+        "message": "Спасибо за ваш заказ. Продавец свяжется с вами в ближайшее время."
+      }
+    }
+  }
+}
