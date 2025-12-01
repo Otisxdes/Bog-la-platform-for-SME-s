@@ -5,8 +5,8 @@
   "/api/orders/route": "app/api/orders/route.js",
   "/[locale]/page": "app/[locale]/page.js",
   "/[locale]/(buyer)/b/[sellerSlug]/[checkoutSlug]/page": "app/[locale]/(buyer)/b/[sellerSlug]/[checkoutSlug]/page.js",
-  "/[locale]/(seller)/checkout-links/new/page": "app/[locale]/(seller)/checkout-links/new/page.js",
-  "/[locale]/(seller)/checkout-links/page": "app/[locale]/(seller)/checkout-links/page.js",
   "/[locale]/(seller)/orders/[id]/page": "app/[locale]/(seller)/orders/[id]/page.js",
-  "/[locale]/(seller)/orders/page": "app/[locale]/(seller)/orders/page.js"
+  "/[locale]/(seller)/checkout-links/page": "app/[locale]/(seller)/checkout-links/page.js",
+  "/[locale]/(seller)/orders/page": "app/[locale]/(seller)/orders/page.js",
+  "/[locale]/(seller)/checkout-links/new/page": "app/[locale]/(seller)/checkout-links/new/page.js"
 }
