@@ -1,5 +1,6 @@
 {
   "common": {
+    "language": "Language",
     "loading": "Loading...",
     "error": "Error",
     "success": "Success",
@@ -13,6 +14,27 @@
     "submit": "Submit",
     "search": "Search",
     "noResults": "No results found"
+  },
+  "home": {
+    "title": "Bog'la for SME's",
+    "subtitle": "Simple platform for creating payment links and managing orders for small and medium businesses",
+    "manageLinks": "Manage Links",
+    "viewOrders": "View Orders",
+    "features": {
+      "paymentLinks": {
+        "title": "Payment Links",
+        "description": "Create personalized links for each product"
+      },
+      "orderManagement": {
+        "title": "Order Management",
+        "description": "Track all orders in one place"
+      },
+      "sizeCustomization": {
+        "title": "Size Customization",
+        "description": "Add multiple sizes for each product"
+      }
+    },
+    "footer": "All rights reserved"
   },
   "nav": {
     "dashboard": "Overview",

@@ -10,7 +10,13 @@ export async function authenticatedFetch(
   
   // Add seller authentication if available
   if (typeof window !== 'undefined') {
+    const token = localStorage.getItem('bogla_seller_token');
     const sellerData = localStorage.getItem('bogla_seller');
+    
+    if (token) {
+      headers.set('Authorization', `Bearer ${token}`);
+    }
+    
     if (sellerData) {
       try {
         const seller = JSON.parse(sellerData);
