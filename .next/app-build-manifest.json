@@ -12,25 +12,8 @@
       "static/chunks/fd9d1056-8e6ff4541a4f8f49.js",
       "static/chunks/117-8ecc3aba8e6a681a.js",
       "static/chunks/main-app-bebe2108cbfa86dc.js",
-      "static/css/138af52091e7c249.css",
+      "static/css/8353c92a53e2d7d7.css",
       "static/chunks/app/layout-71ddb88dcae537d2.js"
-    ],
-    "/[locale]/page": [
-      "static/chunks/webpack-03f7c6bc932ce1e3.js",
-      "static/chunks/fd9d1056-8e6ff4541a4f8f49.js",
-      "static/chunks/117-8ecc3aba8e6a681a.js",
-      "static/chunks/main-app-bebe2108cbfa86dc.js",
-      "static/chunks/171-a905b8a7c439b77f.js",
-      "static/chunks/673-2a1297fd4463a306.js",
-      "static/chunks/app/[locale]/page-4586217c6ed612ea.js"
-    ],
-    "/[locale]/layout": [
-      "static/chunks/webpack-03f7c6bc932ce1e3.js",
-      "static/chunks/fd9d1056-8e6ff4541a4f8f49.js",
-      "static/chunks/117-8ecc3aba8e6a681a.js",
-      "static/chunks/main-app-bebe2108cbfa86dc.js",
-      "static/chunks/171-a905b8a7c439b77f.js",
-      "static/chunks/app/[locale]/layout-0f138cefd83963f0.js"
     ],
     "/[locale]/(buyer)/b/[sellerSlug]/[checkoutSlug]/page": [
       "static/chunks/webpack-03f7c6bc932ce1e3.js",
@@ -41,6 +24,23 @@
       "static/chunks/673-2a1297fd4463a306.js",
       "static/chunks/626-8419e9f0ef446c52.js",
       "static/chunks/app/[locale]/(buyer)/b/[sellerSlug]/[checkoutSlug]/page-bb5befe0cce151b7.js"
+    ],
+    "/[locale]/layout": [
+      "static/chunks/webpack-03f7c6bc932ce1e3.js",
+      "static/chunks/fd9d1056-8e6ff4541a4f8f49.js",
+      "static/chunks/117-8ecc3aba8e6a681a.js",
+      "static/chunks/main-app-bebe2108cbfa86dc.js",
+      "static/chunks/171-a905b8a7c439b77f.js",
+      "static/chunks/app/[locale]/layout-0f138cefd83963f0.js"
+    ],
+    "/[locale]/page": [
+      "static/chunks/webpack-03f7c6bc932ce1e3.js",
+      "static/chunks/fd9d1056-8e6ff4541a4f8f49.js",
+      "static/chunks/117-8ecc3aba8e6a681a.js",
+      "static/chunks/main-app-bebe2108cbfa86dc.js",
+      "static/chunks/171-a905b8a7c439b77f.js",
+      "static/chunks/673-2a1297fd4463a306.js",
+      "static/chunks/app/[locale]/page-4586217c6ed612ea.js"
     ],
     "/[locale]/(seller)/orders/[id]/page": [
       "static/chunks/webpack-03f7c6bc932ce1e3.js",
