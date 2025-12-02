@@ -8,7 +8,12 @@
     "back": "Назад",
     "loading": "Загрузка...",
     "error": "Ошибка",
-    "success": "Успешно"
+    "success": "Успешно",
+    "view": "Просмотр",
+    "next": "Далее",
+    "submit": "Отправить",
+    "search": "Поиск",
+    "noResults": "Ничего не найдено"
   },
   "home": {
     "title": "Bog'la for SME's",
@@ -31,9 +36,41 @@
     },
     "footer": "Все права защищены"
   },
+  "nav": {
+    "dashboard": "Обзор",
+    "checkoutLinks": "Ссылки на оплату",
+    "orders": "Заказы",
+    "customers": "Клиенты",
+    "logout": "Выйти"
+  },
+  "login": {
+    "title": "Добро пожаловать в Bog'la",
+    "subtitle": "Войдите, чтобы управлять ссылками и заказами",
+    "email": "Email",
+    "emailPlaceholder": "seller@example.com",
+    "password": "Пароль",
+    "passwordPlaceholder": "••••••••",
+    "submit": "Войти",
+    "submitting": "Входим...",
+    "demoCredentials": "Демо данные",
+    "error": "Неверный email или пароль"
+  },
+  "dashboard": {
+    "title": "Обзор",
+    "todayOrders": "Заказы за сегодня",
+    "totalOrders": "Всего заказов",
+    "totalCustomers": "Всего клиентов",
+    "latestOrders": "Последние заказы",
+    "noOrders": "Пока нет заказов"
+  },
   "checkoutLinks": {
     "title": "Ссылки на оплату",
+    "new": "Новая ссылка",
     "newButton": "Новая ссылка",
+    "name": "Название",
+    "url": "URL",
+    "createdDate": "Дата создания",
+    "ordersCount": "Количество заказов",
     "noLinks": "Пока нет ссылок на оплату. Создайте первую!",
     "table": {
       "name": "Название",
@@ -48,27 +85,34 @@
       "productNamePlaceholder": "Например: Летняя футболка",
       "size": "Размер",
       "sizePlaceholder": "Например: S, M, L, XL",
-      "productImage": "Изображение товара",
+      "productImage": "Изображение товара (необязательно)",
       "productImagePlaceholder": "https://example.com/image.jpg",
       "productImageHelp": "Вставьте ссылку на изображение товара",
-      "price": "Цена",
+      "price": "Цена (UZS)",
       "currency": "Валюта",
       "defaultQty": "Количество по умолчанию",
-      "maxQty": "Максимальное количество",
+      "maxQty": "Максимальное количество (необязательно)",
       "deliveryOptions": "Варианты доставки",
       "courierCity": "Курьер по городу",
       "pickup": "Самовывоз",
       "regionDelivery": "Доставка по регионам",
       "deliveryError": "Выберите хотя бы один вариант доставки",
       "paymentNote": "Инструкции по оплате",
-      "paymentNotePlaceholder": "Опишите, как покупатель должен оплатить...",
+      "paymentNotePlaceholder": "Например: Оплатите через Payme или Uzcard на карту: 8600 xxxx xxxx xxxx",
       "submit": "Создать ссылку",
       "submitting": "Создание..."
     }
   },
   "orders": {
     "title": "Заказы",
+    "time": "Время",
+    "buyerName": "Имя покупателя",
+    "product": "Товар",
+    "status": "Статус",
+    "actions": "Действия",
     "noOrders": "Заказов пока нет",
+    "paymentStatus": "Статус оплаты",
+    "deliveryStatus": "Статус доставки",
     "table": {
       "time": "Время",
       "buyerName": "Имя покупателя",
@@ -85,6 +129,7 @@
       "orderNumber": "Номер заказа",
       "createdAt": "Создан",
       "product": "Товар",
+      "size": "Размер",
       "quantity": "Количество",
       "totalPrice": "Общая цена",
       "buyerInfo": "Информация о покупателе",
@@ -108,6 +153,83 @@
         "sent": "Отправлено",
         "delivered": "Доставлено"
       }
+    },
+    "statuses": {
+      "new": "Новый",
+      "paid": "Оплачено",
+      "cancelled": "Отменено",
+      "pending": "Ожидание",
+      "sent": "Отправлено",
+      "delivered": "Доставлено"
+    }
+  },
+  "customers": {
+    "title": "Клиенты",
+    "name": "Имя",
+    "buyerName": "Имя покупателя",
+    "phone": "Телефон",
+    "city": "Город",
+    "totalOrders": "Всего заказов",
+    "lastOrder": "Последний заказ",
+    "lastOrderDate": "Дата последнего заказа",
+    "marketingOptIn": "Согласие на маркетинг",
+    "actions": "Действия",
+    "view": "Просмотр",
+    "yes": "Да",
+    "no": "Нет",
+    "noCustomers": "Пока нет клиентов",
+    "detail": {
+      "title": "Профиль клиента",
+      "backToCustomers": "← Назад к клиентам",
+      "customerInformation": "Информация о клиенте",
+      "orderHistory": "История заказов",
+      "fullName": "Полное имя:",
+      "phone": "Телефон:",
+      "city": "Город:",
+      "address": "Адрес:",
+      "username": "Имя пользователя:",
+      "marketingOptIn": "Согласие на маркетинг:",
+      "customerSince": "Клиент с:",
+      "lastOrder": "Последний заказ:",
+      "totalOrders": "Всего заказов:",
+      "noOrders": "Заказов пока нет",
+      "quantity": "Кол-во:",
+      "customerNotFound": "Клиент не найден",
+      "goBack": "Назад",
+      "loadError": "Не удалось загрузить клиента"
+    }
+  },
+  "checkout": {
+    "size": "Размер",
+    "quantity": "Количество",
+    "maximum": "Максимум",
+    "deliveryMethod": "Способ доставки",
+    "selectDelivery": "Выберите способ доставки",
+    "courierCity": "Курьер по городу",
+    "pickup": "Самовывоз",
+    "regionDelivery": "Доставка по регионам",
+    "yourDetails": "Ваши данные",
+    "fullName": "Полное имя",
+    "fullNamePlaceholder": "Введите ваше полное имя",
+    "phone": "Номер телефона",
+    "phonePlaceholder": "+998XXXXXXXXX",
+    "city": "Город",
+    "selectCity": "Выберите город",
+    "address": "Адрес",
+    "addressPlaceholder": "Введите адрес доставки",
+    "username": "Instagram/Telegram (необязательно)",
+    "usernamePlaceholder": "@username",
+    "privacyOptions": "Настройки конфиденциальности",
+    "useOnlyThisOrder": "Использовать мои данные только для этого заказа (по умолчанию)",
+    "saveForNext": "Сохранить данные для быстрых заказов у этого продавца",
+    "privacyNote": "Ваши данные хранятся безопасно. Вы можете попросить продавца удалить их в любое время.",
+    "placeOrder": "Оформить заказ",
+    "placingOrder": "Оформляем заказ...",
+    "savedDetails": {
+      "title": "Использовать сохраненные данные?",
+      "use": "Использовать",
+      "edit": "Редактировать",
+      "remove": "Удалить сохраненные данные"
     }
   },
   "buyer": {
@@ -155,5 +277,46 @@
         "message": "Спасибо за ваш заказ. Продавец свяжется с вами в ближайшее время."
       }
     }
+  },
+  "success": {
+    "title": "Заказ отправлен {sellerName}",
+    "subtitle": "Ваш заказ получен. Пожалуйста, оплатите для продолжения.",
+    "orderSummary": "Детали заказа",
+    "product": "Товар",
+    "size": "Размер",
+    "quantity": "Количество",
+    "unitPrice": "Цена за единицу",
+    "total": "Итого",
+    "deliveryMethod": "Способ доставки",
+    "contact": "Контакт",
+    "paymentInstructions": "Инструкции по оплате",
+    "copyCard": "Скопировать номер карты",
+    "copied": "Скопировано!",
+    "openInstagram": "Открыть Instagram DM продавца",
+    "createAnother": "Создать еще один заказ",
+    "sellerNote": "Продавец подтвердит оплату и свяжется с вами по телефону или в DM."
+  },
+  "cities": {
+    "Tashkent": "Ташкент",
+    "Samarkand": "Самарканд",
+    "Bukhara": "Бухара",
+    "Andijan": "Андижан",
+    "Namangan": "Наманган",
+    "Fergana": "Фергана",
+    "Nukus": "Нукус",
+    "Qarshi": "Карши",
+    "Guliston": "Гулистон",
+    "Termez": "Термез",
+    "Jizzakh": "Джиззах",
+    "Navoiy": "Навои",
+    "Urgench": "Ургенч",
+    "Kokand": "Коканд",
+    "Margilan": "Маргилан",
+    "Other": "Другой"
+  },
+  "validation": {
+    "required": "Это поле обязательно",
+    "invalidEmail": "Неверный email адрес",
+    "invalidPhone": "Неверный формат узбекского номера (+998XXXXXXXXX)"
   }
 }

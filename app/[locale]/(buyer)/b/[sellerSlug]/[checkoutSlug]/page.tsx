@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState, use } from 'react'
+import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
@@ -68,9 +68,8 @@ const selectClass = "w-full px-4 pr-10 py-2.5 bg-white border border-gray-200 ro
 export default function CheckoutPage({
   params,
 }: {
-  params: Promise<{ sellerSlug: string; checkoutSlug: string }>
+  params: { sellerSlug: string; checkoutSlug: string }
 }) {
-  const resolvedParams = use(params)
   const t = useTranslations('buyer.checkout')
   const router = useRouter()
   const [checkoutLink, setCheckoutLink] = useState<CheckoutLink | null>(null)
@@ -117,7 +116,7 @@ export default function CheckoutPage({
   useEffect(() => {
     async function fetchCheckoutLink() {
       try {
-        const response = await fetch(`/api/checkout-links/${resolvedParams.sellerSlug}/${resolvedParams.checkoutSlug}`)
+        const response = await fetch(`/api/checkout-links/${params.sellerSlug}/${params.checkoutSlug}`)
         if (!response.ok) {
           throw new Error('Failed to load checkout link')
         }
@@ -133,7 +132,7 @@ export default function CheckoutPage({
       }
     }
     fetchCheckoutLink()
-  }, [resolvedParams.sellerSlug, resolvedParams.checkoutSlug, setValue, t])
+  }, [params.sellerSlug, params.checkoutSlug, setValue, t])
 
   // Auto-fill form if saved profile exists
   useEffect(() => {
@@ -209,7 +208,7 @@ export default function CheckoutPage({
 
       // Redirect to success page
       router.push(
-        `/b/${resolvedParams.sellerSlug}/${resolvedParams.checkoutSlug}/success?orderId=${order.id}`
+        `/b/${params.sellerSlug}/${params.checkoutSlug}/success?orderId=${order.id}`
       )
     } catch (err: any) {
       setError(err.message || 'Failed to place order. Please try again.')
@@ -260,7 +259,16 @@ export default function CheckoutPage({
         <div className="max-w-2xl mx-auto px-4 py-4 flex items-center gap-3">
           <button
             type="button"
-            onClick={() => window.history.back()}
+            onClick={() => {
+              // Check if we can go back in history
+              // If opened in new tab or no history, go to home page
+              if (document.referrer && document.referrer !== window.location.href) {
+                router.back()
+              } else {
+                // No referrer means opened directly or in new tab, go to home
+                router.push('/')
+              }
+            }}
             className="p-2 -ml-2 rounded-lg hover:bg-gray-100 transition-colors text-gray-600"
           >
             <ChevronLeft className="w-5 h-5" />

@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react'
 import { useRouter, Link } from '@/i18n/routing'
 import { authenticatedFetch } from '@/lib/api'
+import { useTranslations } from 'next-intl'
 
 interface Order {
   id: string
@@ -32,6 +33,8 @@ interface Customer {
 
 export default function CustomerDetailPage({ params }: { params: { id: string } }) {
   const router = useRouter()
+  const t = useTranslations('customers.detail')
+  const tCustomers = useTranslations('customers')
   const [customer, setCustomer] = useState<Customer | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
@@ -44,7 +47,7 @@ export default function CustomerDetailPage({ params }: { params: { id: string } 
         const data = await response.json()
         setCustomer(data)
       } catch (err: any) {
-        setError(err.message || 'Failed to load customer')
+        setError(err.message || t('loadError'))
       } finally {
         setLoading(false)
       }
@@ -63,12 +66,12 @@ export default function CustomerDetailPage({ params }: { params: { id: string } 
   if (error || !customer) {
     return (
       <div className="bg-red-50 border border-red-200 rounded-md p-4">
-        <p className="text-red-800">{error || 'Customer not found'}</p>
+        <p className="text-red-800">{error || t('customerNotFound')}</p>
         <button
           onClick={() => router.back()}
           className="mt-4 text-blue-600 hover:text-blue-900"
         >
-          Go back
+          {t('goBack')}
         </button>
       </div>
     )
@@ -77,44 +80,44 @@ export default function CustomerDetailPage({ params }: { params: { id: string } 
   return (
     <div>
       <div className="flex justify-between items-center mb-6">
-        <h1 className="text-2xl font-bold">Customer Profile</h1>
+        <h1 className="text-2xl font-bold">{t('title')}</h1>
         <button
           onClick={() => router.back()}
           className="text-gray-600 hover:text-gray-900"
         >
-          ← Back to Customers
+          {t('backToCustomers')}
         </button>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Customer Information */}
         <div className="bg-white rounded-lg shadow p-6">
-          <h2 className="text-lg font-semibold mb-4">Customer Information</h2>
+          <h2 className="text-lg font-semibold mb-4">{t('customerInformation')}</h2>
           <div className="space-y-3">
             <div>
-              <span className="text-sm text-gray-600">Full Name:</span>
+              <span className="text-sm text-gray-600">{t('fullName')}</span>
               <span className="ml-2 font-medium">{customer.fullName}</span>
             </div>
             <div>
-              <span className="text-sm text-gray-600">Phone:</span>
+              <span className="text-sm text-gray-600">{t('phone')}</span>
               <span className="ml-2 font-medium">{customer.phone}</span>
             </div>
             <div>
-              <span className="text-sm text-gray-600">City:</span>
+              <span className="text-sm text-gray-600">{t('city')}</span>
               <span className="ml-2 font-medium">{customer.city || '-'}</span>
             </div>
             <div>
-              <span className="text-sm text-gray-600">Address:</span>
+              <span className="text-sm text-gray-600">{t('address')}</span>
               <span className="ml-2 font-medium">{customer.address || '-'}</span>
             </div>
             {customer.username && (
               <div>
-                <span className="text-sm text-gray-600">Username:</span>
+                <span className="text-sm text-gray-600">{t('username')}</span>
                 <span className="ml-2 font-medium">{customer.username}</span>
               </div>
             )}
             <div>
-              <span className="text-sm text-gray-600">Marketing Opt-in:</span>
+              <span className="text-sm text-gray-600">{t('marketingOptIn')}</span>
               <span className="ml-2">
                 <span
                   className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${
@@ -123,26 +126,26 @@ export default function CustomerDetailPage({ params }: { params: { id: string } 
                       : 'bg-gray-100 text-gray-800'
                   }`}
                 >
-                  {customer.marketingOptIn ? 'Yes' : 'No'}
+                  {customer.marketingOptIn ? tCustomers('yes') : tCustomers('no')}
                 </span>
               </span>
             </div>
             <div>
-              <span className="text-sm text-gray-600">Customer Since:</span>
+              <span className="text-sm text-gray-600">{t('customerSince')}</span>
               <span className="ml-2 font-medium">
                 {new Date(customer.createdAt).toLocaleDateString()}
               </span>
             </div>
             {customer.lastUsedAt && (
               <div>
-                <span className="text-sm text-gray-600">Last Order:</span>
+                <span className="text-sm text-gray-600">{t('lastOrder')}</span>
                 <span className="ml-2 font-medium">
                   {new Date(customer.lastUsedAt).toLocaleDateString()}
                 </span>
               </div>
             )}
             <div>
-              <span className="text-sm text-gray-600">Total Orders:</span>
+              <span className="text-sm text-gray-600">{t('totalOrders')}</span>
               <span className="ml-2 font-medium">{customer._count.orders}</span>
             </div>
           </div>
@@ -150,9 +153,9 @@ export default function CustomerDetailPage({ params }: { params: { id: string } 
 
         {/* Order History */}
         <div className="bg-white rounded-lg shadow p-6">
-          <h2 className="text-lg font-semibold mb-4">Order History</h2>
+          <h2 className="text-lg font-semibold mb-4">{t('orderHistory')}</h2>
           {customer.orders.length === 0 ? (
-            <p className="text-gray-500">No orders yet</p>
+            <p className="text-gray-500">{t('noOrders')}</p>
           ) : (
             <div className="space-y-4">
               {customer.orders.map((order) => (
@@ -176,7 +179,7 @@ export default function CustomerDetailPage({ params }: { params: { id: string } 
                       <p className="font-semibold">
                         {order.totalPrice.toLocaleString()} UZS
                       </p>
-                      <p className="text-sm text-gray-500">Qty: {order.quantity}</p>
+                      <p className="text-sm text-gray-500">{t('quantity')} {order.quantity}</p>
                     </div>
                   </div>
                 </div>

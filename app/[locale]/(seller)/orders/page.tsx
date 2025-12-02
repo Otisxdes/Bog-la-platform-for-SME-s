@@ -122,7 +122,7 @@ export default function OrdersPage() {
                           : 'bg-yellow-100 text-yellow-800'
                       }`}
                     >
-                      {order.paymentStatus}
+                      {t(`statuses.${order.paymentStatus}`)}
                     </span>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
@@ -135,7 +135,7 @@ export default function OrdersPage() {
                           : 'bg-gray-100 text-gray-800'
                       }`}
                     >
-                      {order.deliveryStatus}
+                      {t(`statuses.${order.deliveryStatus}`)}
                     </span>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">

@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react'
 import { authenticatedFetch } from '@/lib/api'
 import { Link } from '@/i18n/routing'
+import { useTranslations } from 'next-intl'
 
 interface Customer {
   id: string
@@ -15,6 +16,7 @@ interface Customer {
 }
 
 export default function CustomersPage() {
+  const t = useTranslations('customers')
   const [customers, setCustomers] = useState<Customer[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
@@ -53,32 +55,32 @@ export default function CustomersPage() {
 
   return (
     <div>
-      <h1 className="text-2xl font-bold mb-6">Customers</h1>
+      <h1 className="text-2xl font-bold mb-6">{t('title')}</h1>
 
       <div className="bg-white rounded-lg shadow overflow-hidden">
         <table className="min-w-full divide-y divide-gray-200">
           <thead className="bg-gray-50">
             <tr>
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Buyer Name
+                {t('buyerName')}
               </th>
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Phone
+                {t('phone')}
               </th>
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                City
+                {t('city')}
               </th>
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Total Orders
+                {t('totalOrders')}
               </th>
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Last Order Date
+                {t('lastOrderDate')}
               </th>
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Marketing Opt-in
+                {t('marketingOptIn')}
               </th>
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Actions
+                {t('actions')}
               </th>
             </tr>
           </thead>
@@ -86,7 +88,7 @@ export default function CustomersPage() {
             {customers.length === 0 ? (
               <tr>
                 <td colSpan={7} className="px-6 py-4 text-center text-gray-500">
-                  No customers yet
+                  {t('noCustomers')}
                 </td>
               </tr>
             ) : (
@@ -117,7 +119,7 @@ export default function CustomersPage() {
                           : 'bg-gray-100 text-gray-800'
                       }`}
                     >
-                      {customer.marketingOptIn ? 'Yes' : 'No'}
+                      {customer.marketingOptIn ? t('yes') : t('no')}
                     </span>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
@@ -125,7 +127,7 @@ export default function CustomersPage() {
                       href={`/customers/${customer.id}`}
                       className="text-blue-600 hover:text-blue-900"
                     >
-                      View
+                      {t('view')}
                     </Link>
                   </td>
                 </tr>

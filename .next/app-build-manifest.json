@@ -1,0 +1,70 @@
+{
+  "pages": {
+    "/[locale]/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/[locale]/page.js"
+    ],
+    "/[locale]/layout": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/[locale]/layout.js"
+    ],
+    "/layout": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/css/app/layout.css",
+      "static/chunks/app/layout.js"
+    ],
+    "/[locale]/(seller)/login/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/[locale]/(seller)/login/page.js"
+    ],
+    "/[locale]/(seller)/layout": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/[locale]/(seller)/layout.js"
+    ],
+    "/[locale]/(seller)/dashboard/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/[locale]/(seller)/dashboard/page.js"
+    ],
+    "/[locale]/(seller)/checkout-links/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/[locale]/(seller)/checkout-links/page.js"
+    ],
+    "/[locale]/(seller)/orders/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/[locale]/(seller)/orders/page.js"
+    ],
+    "/[locale]/(seller)/customers/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/[locale]/(seller)/customers/page.js"
+    ],
+    "/[locale]/(buyer)/b/[sellerSlug]/[checkoutSlug]/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/[locale]/(buyer)/b/[sellerSlug]/[checkoutSlug]/page.js"
+    ],
+    "/[locale]/(seller)/orders/[id]/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/[locale]/(seller)/orders/[id]/page.js"
+    ],
+    "/[locale]/(seller)/customers/[id]/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/[locale]/(seller)/customers/[id]/page.js"
+    ],
+    "/[locale]/(seller)/checkout-links/new/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/[locale]/(seller)/checkout-links/new/page.js"
+    ]
+  }
+}

@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState, use } from 'react'
+import { useEffect, useState } from 'react'
 import { useRouter } from '@/i18n/routing'
 import { authenticatedFetch } from '@/lib/api'
 import { useTranslations } from 'next-intl'
@@ -27,8 +27,7 @@ interface Order {
   }
 }
 
-export default function OrderDetailPage({ params }: { params: Promise<{ id: string }> }) {
-  const resolvedParams = use(params)
+export default function OrderDetailPage({ params }: { params: { id: string } }) {
   const t = useTranslations('orders.details')
   const tCommon = useTranslations('common')
   const router = useRouter()
@@ -42,7 +41,7 @@ export default function OrderDetailPage({ params }: { params: Promise<{ id: stri
   useEffect(() => {
     async function fetchOrder() {
       try {
-        const response = await authenticatedFetch(`/api/orders?id=${resolvedParams.id}`)
+        const response = await authenticatedFetch(`/api/orders?id=${params.id}`)
         if (!response.ok) throw new Error('Failed to fetch order')
         const data = await response.json()
         
@@ -61,7 +60,7 @@ export default function OrderDetailPage({ params }: { params: Promise<{ id: stri
       }
     }
     fetchOrder()
-  }, [resolvedParams.id])
+  }, [params.id])
 
   const handleUpdateStatus = async () => {
     if (!order) return
@@ -144,7 +143,7 @@ export default function OrderDetailPage({ params }: { params: Promise<{ id: stri
               <dd className="mt-1 text-sm text-gray-900">{order.checkoutLink.name}</dd>
             </div>
             <div>
-              <dt className="text-sm font-medium text-gray-500">Size</dt>
+              <dt className="text-sm font-medium text-gray-500">{t('size')}</dt>
               <dd className="mt-1">
                 <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-blue-100 text-blue-800">
                   {order.selectedSize}
