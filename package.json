@@ -4,8 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "postinstall": "prisma generate",
-    "build": "prisma generate && node scripts/resolve-failed-migration.js && (prisma migrate deploy || echo '⚠️ Migration deploy had issues, continuing with build...') && next build",
+    "build": "next build",
     "start": "next start",
     "lint": "next lint",
     "db:generate": "prisma generate",
