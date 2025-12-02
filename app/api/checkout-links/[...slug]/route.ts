@@ -1,6 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
 
+// Mark this route as dynamic
+export const dynamic = 'force-dynamic'
+
 // GET /api/checkout-links/[...slug] - Get checkout link by slug (public, for buyer page)
 // slug format: ["sellerSlug", "checkoutSlug"]
 export async function GET(

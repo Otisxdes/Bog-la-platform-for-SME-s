@@ -3,6 +3,9 @@ import { prisma } from '@/lib/prisma'
 import { createOrderSchema } from '@/lib/validations'
 import { getSellerIdFromRequest } from '@/lib/auth'
 
+// Mark this route as dynamic
+export const dynamic = 'force-dynamic'
+
 // POST /api/orders - Create order (public)
 export async function POST(request: NextRequest) {
   try {

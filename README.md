@@ -24,7 +24,13 @@ A checkout link system for Uzbek Instagram/Telegram sellers to automate order co
 npm install
 ```
 
-2. Set up the database:
+2. Set up environment variables:
+```bash
+# Copy the example environment file
+cp .env.example .env
+```
+
+3. Set up the database:
 ```bash
 # Generate Prisma client
 npm run db:generate
@@ -33,15 +39,21 @@ npm run db:generate
 npm run db:migrate
 ```
 
-3. Seed the database with a test seller:
+4. Seed the database with a test seller:
 ```bash
 npm run db:seed
 ```
 
-This creates a test seller:
-- Email: seller@example.com
-- Password: password123
-- Slug: test-seller
+### 🧪 Test Credentials
+
+**IMPORTANT:** After running `npm run db:seed`, you can log in with:
+
+- **Email:** `seller@example.com`
+- **Password:** `password123`
+- **Seller Slug:** `test-seller`
+
+The seed script also creates a sample checkout link accessible at:
+`http://localhost:3000/b/test-seller/white-hoodie`
 
 Or create a seller manually using Prisma Studio:
 ```bash

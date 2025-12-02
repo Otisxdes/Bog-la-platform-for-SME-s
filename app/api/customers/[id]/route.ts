@@ -2,6 +2,9 @@ import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
 import { getSellerIdFromRequest } from '@/lib/auth'
 
+// Mark this route as dynamic
+export const dynamic = 'force-dynamic'
+
 // GET /api/customers/[id] - Get customer detail with orders
 export async function GET(
   request: NextRequest,

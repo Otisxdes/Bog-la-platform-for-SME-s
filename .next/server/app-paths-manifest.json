@@ -1,14 +1,7 @@
 {
-  "/api/customers/[id]/route": "app/api/customers/[id]/route.js",
-  "/api/customers/route": "app/api/customers/route.js",
-  "/api/checkout-links/route": "app/api/checkout-links/route.js",
-  "/api/orders/route": "app/api/orders/route.js",
   "/[locale]/(buyer)/b/[sellerSlug]/[checkoutSlug]/page": "app/[locale]/(buyer)/b/[sellerSlug]/[checkoutSlug]/page.js",
   "/[locale]/(seller)/dashboard/page": "app/[locale]/(seller)/dashboard/page.js",
-  "/[locale]/(seller)/orders/[id]/page": "app/[locale]/(seller)/orders/[id]/page.js",
-  "/[locale]/(seller)/customers/page": "app/[locale]/(seller)/customers/page.js",
-  "/[locale]/(seller)/customers/[id]/page": "app/[locale]/(seller)/customers/[id]/page.js",
   "/[locale]/(seller)/checkout-links/page": "app/[locale]/(seller)/checkout-links/page.js",
-  "/[locale]/(seller)/checkout-links/new/page": "app/[locale]/(seller)/checkout-links/new/page.js",
-  "/[locale]/(seller)/orders/page": "app/[locale]/(seller)/orders/page.js"
+  "/[locale]/(seller)/orders/[id]/page": "app/[locale]/(seller)/orders/[id]/page.js",
+  "/[locale]/(seller)/checkout-links/new/page": "app/[locale]/(seller)/checkout-links/new/page.js"
 }

@@ -3,6 +3,9 @@ import { prisma } from '@/lib/prisma'
 import { createCheckoutLinkSchema } from '@/lib/validations'
 import { getSellerIdFromRequest } from '@/lib/auth'
 
+// Mark this route as dynamic
+export const dynamic = 'force-dynamic'
+
 // POST /api/checkout-links - Create new checkout link
 export async function POST(request: NextRequest) {
   try {
@@ -12,9 +15,7 @@ export async function POST(request: NextRequest) {
     }
 
     const body = await request.json()
-    console.log('Received checkout link data:', body)
     const validated = createCheckoutLinkSchema.parse(body)
-    console.log('Validated checkout link data:', validated)
 
     // Generate slug from name (simple slugification)
     let slug = validated.name
@@ -67,12 +68,8 @@ export async function POST(request: NextRequest) {
         { status: 400 }
       )
     }
-    console.error('Error creating checkout link:', error)
-    console.error('Error details:', {
-      name: error.name,
-      message: error.message,
-      stack: error.stack,
-    })
+    // Log error without exposing sensitive details
+    console.error('Error creating checkout link')
     return NextResponse.json(
       { error: 'Failed to create checkout link', details: error.message },
       { status: 500 }

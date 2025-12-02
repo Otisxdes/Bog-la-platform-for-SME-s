@@ -57,8 +57,6 @@ export default function NewCheckoutLinkPage() {
         imageUrl: data.imageUrl?.trim() || '',
       }
 
-      console.log('Submitting checkout link data:', cleanedData)
-
       const response = await authenticatedFetch('/api/checkout-links', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -67,7 +65,6 @@ export default function NewCheckoutLinkPage() {
 
       if (!response.ok) {
         const errorData = await response.json()
-        console.error('API Error:', errorData)
         const errorMessage = errorData.details 
           ? `${errorData.error}: ${JSON.stringify(errorData.details)}`
           : errorData.error || 'Failed to create checkout link'
@@ -77,7 +74,6 @@ export default function NewCheckoutLinkPage() {
       // Redirect to checkout links list
       router.push('/checkout-links')
     } catch (err: any) {
-      console.error('Form submission error:', err)
       setError(err.message || 'Failed to create checkout link. Please try again.')
       setLoading(false)
     }
