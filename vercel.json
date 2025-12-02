@@ -1,4 +1,4 @@
 {
-  "buildCommand": "prisma generate && prisma migrate deploy && next build"
+  "buildCommand": "prisma generate && node scripts/resolve-failed-migration.js && prisma migrate deploy && next build"
 }
 
