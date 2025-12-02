@@ -1,0 +1,3 @@
+-- This migration was originally for SQLite but is being marked as applied
+-- for PostgreSQL. The actual schema changes are handled by the init_postgresql migration.
+-- This file exists only to allow Prisma to resolve the failed migration state.
