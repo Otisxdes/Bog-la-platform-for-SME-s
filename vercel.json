@@ -1,5 +1,4 @@
 {
-  "framework": "nextjs",
-  "installCommand": "npm install && npx prisma generate && node scripts/resolve-failed-migration.js && (npx prisma migrate deploy || true)"
+  "framework": "nextjs"
 }
 
