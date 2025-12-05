@@ -94,15 +94,15 @@ export default function DashboardPage() {
       {/* Stats Cards */}
       <div className="grid gap-4 md:grid-cols-3">
         {/* Today's Orders */}
-        <div className="rounded-lg border bg-card text-card-foreground">
-          <div className="p-6 space-y-2">
+        <div className="relative overflow-hidden rounded-xl border bg-card text-card-foreground shadow-sm hover:shadow-md transition-shadow">
+          <div className="p-6 space-y-3">
             <div className="flex items-center justify-between">
-              <h3 className="text-sm font-medium">{t('todayOrders')}</h3>
+              <h3 className="text-sm font-medium text-muted-foreground">{t('todayOrders')}</h3>
               <Calendar className="h-4 w-4 text-muted-foreground" />
             </div>
-            <div>
-              <p className="text-2xl font-bold">{stats?.todayOrders || 0}</p>
-              <p className="text-xs text-muted-foreground mt-1">
+            <div className="space-y-1">
+              <p className="text-3xl font-bold tracking-tight">{stats?.todayOrders || 0}</p>
+              <p className="text-xs text-muted-foreground">
                 {t('todayOrdersSubtitle')}
               </p>
             </div>
@@ -110,15 +110,15 @@ export default function DashboardPage() {
         </div>
 
         {/* Total Orders */}
-        <div className="rounded-lg border bg-card text-card-foreground">
-          <div className="p-6 space-y-2">
+        <div className="relative overflow-hidden rounded-xl border bg-card text-card-foreground shadow-sm hover:shadow-md transition-shadow">
+          <div className="p-6 space-y-3">
             <div className="flex items-center justify-between">
-              <h3 className="text-sm font-medium">{t('totalOrders')}</h3>
+              <h3 className="text-sm font-medium text-muted-foreground">{t('totalOrders')}</h3>
               <ShoppingBag className="h-4 w-4 text-muted-foreground" />
             </div>
-            <div>
-              <p className="text-2xl font-bold">{stats?.totalOrders || 0}</p>
-              <p className="text-xs text-muted-foreground mt-1">
+            <div className="space-y-1">
+              <p className="text-3xl font-bold tracking-tight">{stats?.totalOrders || 0}</p>
+              <p className="text-xs text-muted-foreground">
                 {t('totalOrdersSubtitle')}
               </p>
             </div>
@@ -126,15 +126,15 @@ export default function DashboardPage() {
         </div>
 
         {/* Total Customers */}
-        <div className="rounded-lg border bg-card text-card-foreground">
-          <div className="p-6 space-y-2">
+        <div className="relative overflow-hidden rounded-xl border bg-card text-card-foreground shadow-sm hover:shadow-md transition-shadow">
+          <div className="p-6 space-y-3">
             <div className="flex items-center justify-between">
-              <h3 className="text-sm font-medium">{t('totalCustomers')}</h3>
+              <h3 className="text-sm font-medium text-muted-foreground">{t('totalCustomers')}</h3>
               <Users className="h-4 w-4 text-muted-foreground" />
             </div>
-            <div>
-              <p className="text-2xl font-bold">{stats?.totalCustomers || 0}</p>
-              <p className="text-xs text-muted-foreground mt-1">
+            <div className="space-y-1">
+              <p className="text-3xl font-bold tracking-tight">{stats?.totalCustomers || 0}</p>
+              <p className="text-xs text-muted-foreground">
                 {t('totalCustomersSubtitle')}
               </p>
             </div>
@@ -143,10 +143,10 @@ export default function DashboardPage() {
       </div>
 
       {/* Latest Orders */}
-      <div className="rounded-lg border bg-card">
-        <div className="p-6">
-          <h2 className="text-lg font-semibold">{t('latestOrders')}</h2>
-          <p className="text-sm text-muted-foreground">{t('latestOrdersSubtitle')}</p>
+      <div className="rounded-xl border bg-card shadow-sm">
+        <div className="p-6 pb-4">
+          <h2 className="text-lg font-semibold tracking-tight">{t('latestOrders')}</h2>
+          <p className="text-sm text-muted-foreground mt-1">{t('latestOrdersSubtitle')}</p>
         </div>
         <div className="overflow-x-auto">
           <table className="w-full">
