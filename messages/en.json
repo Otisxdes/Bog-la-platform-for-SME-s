@@ -57,10 +57,15 @@
   },
   "dashboard": {
     "title": "Overview",
+    "subtitle": "Welcome back! Here's what's happening with your business.",
     "todayOrders": "Today's Orders",
+    "todayOrdersSubtitle": "New orders received today",
     "totalOrders": "Total Orders",
+    "totalOrdersSubtitle": "All time orders",
     "totalCustomers": "Total Customers",
+    "totalCustomersSubtitle": "Registered customers",
     "latestOrders": "Latest Orders",
+    "latestOrdersSubtitle": "Recent orders from your customers",
     "noOrders": "No orders yet"
   },
   "checkoutLinks": {

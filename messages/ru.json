@@ -57,10 +57,15 @@
   },
   "dashboard": {
     "title": "Обзор",
+    "subtitle": "С возвращением! Вот что происходит с вашим бизнесом.",
     "todayOrders": "Заказы за сегодня",
+    "todayOrdersSubtitle": "Новые заказы, полученные сегодня",
     "totalOrders": "Всего заказов",
+    "totalOrdersSubtitle": "Заказы за все время",
     "totalCustomers": "Всего клиентов",
+    "totalCustomersSubtitle": "Зарегистрированные клиенты",
     "latestOrders": "Последние заказы",
+    "latestOrdersSubtitle": "Недавние заказы от ваших клиентов",
     "noOrders": "Пока нет заказов"
   },
   "checkoutLinks": {

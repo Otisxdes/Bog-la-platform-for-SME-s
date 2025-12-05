@@ -5,6 +5,7 @@ import { authenticatedFetch } from '@/lib/api'
 import { Link } from '@/i18n/routing'
 import { useTranslations } from 'next-intl'
 import { LoadingPage } from '@/components/ui/loading-spinner'
+import { TrendingUp, TrendingDown, Users, ShoppingBag, Calendar } from 'lucide-react'
 
 interface Stats {
   todayOrders: number
@@ -82,87 +83,131 @@ export default function DashboardPage() {
   }
 
   return (
-    <div>
-      <h1 className="text-2xl font-bold mb-6">{t('title')}</h1>
+    <div className="space-y-8">
+      <div>
+        <h1 className="text-3xl font-bold tracking-tight">{t('title')}</h1>
+        <p className="text-muted-foreground mt-1">
+          {t('subtitle')}
+        </p>
+      </div>
 
-      {/* Stats */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-        <div className="bg-white rounded-lg shadow p-6">
-          <h2 className="text-sm font-medium text-gray-600 mb-2">{t('todayOrders')}</h2>
-          <p className="text-3xl font-bold">{stats?.todayOrders || 0}</p>
+      {/* Stats Cards */}
+      <div className="grid gap-4 md:grid-cols-3">
+        {/* Today's Orders */}
+        <div className="relative overflow-hidden rounded-xl border bg-card text-card-foreground shadow-sm hover:shadow-md transition-shadow">
+          <div className="p-6 space-y-3">
+            <div className="flex items-center justify-between">
+              <h3 className="text-sm font-medium text-muted-foreground">{t('todayOrders')}</h3>
+              <Calendar className="h-4 w-4 text-muted-foreground" />
+            </div>
+            <div className="space-y-1">
+              <p className="text-3xl font-bold tracking-tight">{stats?.todayOrders || 0}</p>
+              <p className="text-xs text-muted-foreground">
+                {t('todayOrdersSubtitle')}
+              </p>
+            </div>
+          </div>
         </div>
-        <div className="bg-white rounded-lg shadow p-6">
-          <h2 className="text-sm font-medium text-gray-600 mb-2">{t('totalOrders')}</h2>
-          <p className="text-3xl font-bold">{stats?.totalOrders || 0}</p>
+
+        {/* Total Orders */}
+        <div className="relative overflow-hidden rounded-xl border bg-card text-card-foreground shadow-sm hover:shadow-md transition-shadow">
+          <div className="p-6 space-y-3">
+            <div className="flex items-center justify-between">
+              <h3 className="text-sm font-medium text-muted-foreground">{t('totalOrders')}</h3>
+              <ShoppingBag className="h-4 w-4 text-muted-foreground" />
+            </div>
+            <div className="space-y-1">
+              <p className="text-3xl font-bold tracking-tight">{stats?.totalOrders || 0}</p>
+              <p className="text-xs text-muted-foreground">
+                {t('totalOrdersSubtitle')}
+              </p>
+            </div>
+          </div>
         </div>
-        <div className="bg-white rounded-lg shadow p-6">
-          <h2 className="text-sm font-medium text-gray-600 mb-2">{t('totalCustomers')}</h2>
-          <p className="text-3xl font-bold">{stats?.totalCustomers || 0}</p>
+
+        {/* Total Customers */}
+        <div className="relative overflow-hidden rounded-xl border bg-card text-card-foreground shadow-sm hover:shadow-md transition-shadow">
+          <div className="p-6 space-y-3">
+            <div className="flex items-center justify-between">
+              <h3 className="text-sm font-medium text-muted-foreground">{t('totalCustomers')}</h3>
+              <Users className="h-4 w-4 text-muted-foreground" />
+            </div>
+            <div className="space-y-1">
+              <p className="text-3xl font-bold tracking-tight">{stats?.totalCustomers || 0}</p>
+              <p className="text-xs text-muted-foreground">
+                {t('totalCustomersSubtitle')}
+              </p>
+            </div>
+          </div>
         </div>
       </div>
 
       {/* Latest Orders */}
-      <div className="bg-white rounded-lg shadow">
-        <div className="px-6 py-4 border-b border-gray-200">
-          <h2 className="text-lg font-semibold">{t('latestOrders')}</h2>
+      <div className="rounded-xl border bg-card shadow-sm">
+        <div className="p-6 pb-4">
+          <h2 className="text-lg font-semibold tracking-tight">{t('latestOrders')}</h2>
+          <p className="text-sm text-muted-foreground mt-1">{t('latestOrdersSubtitle')}</p>
         </div>
         <div className="overflow-x-auto">
-          <table className="min-w-full divide-y divide-gray-200">
-            <thead className="bg-gray-50">
-              <tr>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+          <table className="w-full">
+            <thead>
+              <tr className="border-b border-border">
+                <th className="h-12 px-6 text-left align-middle font-medium text-muted-foreground text-sm">
                   {tOrders('time')}
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th className="h-12 px-6 text-left align-middle font-medium text-muted-foreground text-sm">
                   {tOrders('buyerName')}
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th className="h-12 px-6 text-left align-middle font-medium text-muted-foreground text-sm">
                   {tOrders('product')}
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th className="h-12 px-6 text-left align-middle font-medium text-muted-foreground text-sm">
                   {tOrders('status')}
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th className="h-12 px-6 text-left align-middle font-medium text-muted-foreground text-sm">
                   {tOrders('actions')}
                 </th>
               </tr>
             </thead>
-            <tbody className="bg-white divide-y divide-gray-200">
+            <tbody>
               {orders.length === 0 ? (
                 <tr>
-                  <td colSpan={5} className="px-6 py-4 text-center text-gray-500">
-                    {t('noOrders')}
+                  <td colSpan={5} className="h-24 text-center">
+                    <div className="flex flex-col items-center justify-center text-muted-foreground">
+                      <ShoppingBag className="h-8 w-8 mb-2 opacity-50" />
+                      <p className="text-sm">{t('noOrders')}</p>
+                    </div>
                   </td>
                 </tr>
               ) : (
                 orders.map((order) => (
-                  <tr key={order.id}>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                  <tr key={order.id} className="border-b border-border transition-colors hover:bg-muted/50">
+                    <td className="p-4 px-6 align-middle text-sm">
                       {new Date(order.createdAt).toLocaleString()}
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                    <td className="p-4 px-6 align-middle text-sm font-medium">
                       {order.contactSnapshot.fullName}
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                    <td className="p-4 px-6 align-middle text-sm">
                       {order.checkoutLink.name}
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      <span
-                        className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${
+                    <td className="p-4 px-6 align-middle">
+                      <div
+                        className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-semibold transition-colors ${
                           order.paymentStatus === 'paid'
-                            ? 'bg-green-100 text-green-800'
+                            ? 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400'
                             : order.paymentStatus === 'cancelled'
-                            ? 'bg-red-100 text-red-800'
-                            : 'bg-yellow-100 text-yellow-800'
+                            ? 'bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-400'
+                            : 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-400'
                         }`}
                       >
                         {tOrders(`statuses.${order.paymentStatus}`)}
-                      </span>
+                      </div>
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                    <td className="p-4 px-6 align-middle">
                       <Link
                         href={`/orders/${order.id}`}
-                        className="text-blue-600 hover:text-blue-900"
+                        className="text-sm font-medium text-primary hover:underline underline-offset-4"
                       >
                         {tOrders('actions')}
                       </Link>

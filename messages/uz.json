@@ -57,10 +57,15 @@
   },
   "dashboard": {
     "title": "Umumiy ko'rinish",
+    "subtitle": "Xush kelibsiz! Biznesingiz bilan nima bo'lyapti.",
     "todayOrders": "Bugungi buyurtmalar",
+    "todayOrdersSubtitle": "Bugun qabul qilingan yangi buyurtmalar",
     "totalOrders": "Jami buyurtmalar",
+    "totalOrdersSubtitle": "Barcha vaqtdagi buyurtmalar",
     "totalCustomers": "Jami mijozlar",
+    "totalCustomersSubtitle": "Ro'yxatdan o'tgan mijozlar",
     "latestOrders": "So'nggi buyurtmalar",
+    "latestOrdersSubtitle": "Mijozlaringizdan so'nggi buyurtmalar",
     "noOrders": "Hali buyurtmalar yo'q"
   },
   "checkoutLinks": {
