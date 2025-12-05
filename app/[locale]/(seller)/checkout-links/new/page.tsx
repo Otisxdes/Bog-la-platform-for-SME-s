@@ -8,6 +8,12 @@ import { useTranslations, useLocale } from 'next-intl'
 import { createCheckoutLinkSchema } from '@/lib/validations'
 import { authenticatedFetch } from '@/lib/api'
 import type { CreateCheckoutLinkInput } from '@/lib/validations'
+import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
+import { Label } from '@/components/ui/label'
+import { Textarea } from '@/components/ui/textarea'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { Plus, X, ArrowLeft } from 'lucide-react'
 
 export default function NewCheckoutLinkPage() {
   const router = useRouter()
@@ -80,213 +86,238 @@ export default function NewCheckoutLinkPage() {
   }
 
   return (
-    <div>
-      <h1 className="text-2xl font-bold mb-6">{t('checkoutLinks.create.title')}</h1>
+    <div className="space-y-6">
+      <div className="flex items-center gap-4">
+        <Button variant="ghost" size="sm" onClick={() => router.push('/checkout-links')}>
+          <ArrowLeft className="h-4 w-4 mr-2" />
+          {t('common.back')}
+        </Button>
+        <div>
+          <h1 className="text-3xl font-bold tracking-tight">{t('checkoutLinks.create.title')}</h1>
+          <p className="text-sm text-muted-foreground mt-1">
+            Create a new payment link for your product
+          </p>
+        </div>
+      </div>
 
       {error && (
-        <div className="bg-red-50 border border-red-200 rounded-md p-4 mb-6">
+        <div className="bg-red-50 border border-red-200 rounded-md p-4">
           <p className="text-sm text-red-800">{error}</p>
         </div>
       )}
 
-      <form onSubmit={handleSubmit(onSubmit)} className="bg-white rounded-lg shadow p-6 space-y-6">
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
-            {t('checkoutLinks.create.productName')} *
-          </label>
-          <input
-  type="text"
-  {...register('name')}
-  placeholder={t('checkoutLinks.create.productNamePlaceholder')}
-  className="w-full px-3 py-2.5 bg-gray-50 border border-gray-200 rounded-lg text-gray-900 placeholder:text-gray-400 focus:outline-none focus:bg-white focus:border-gray-300 transition-colors"
-/>
-          {errors.name && (
-            <p className="mt-1 text-sm text-red-600">{errors.name.message}</p>
-          )}
-        </div>
+      <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+        <Card>
+          <CardHeader>
+            <CardTitle>Product Details</CardTitle>
+            <CardDescription>Enter basic information about your product</CardDescription>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <div className="space-y-2">
+              <Label htmlFor="name">
+                {t('checkoutLinks.create.productName')} <span className="text-destructive">*</span>
+              </Label>
+              <Input
+                id="name"
+                type="text"
+                {...register('name')}
+                placeholder={t('checkoutLinks.create.productNamePlaceholder')}
+              />
+              {errors.name && (
+                <p className="text-sm text-destructive">{errors.name.message}</p>
+              )}
+            </div>
 
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
-            {t('checkoutLinks.create.size')} *
-          </label>
-          <div className="space-y-2">
-            {fields.map((field, index) => (
-              <div key={field.id} className="flex gap-2">
-                <input
-                  type="text"
-                  {...register(`sizes.${index}` as const)}
-                  placeholder={t('checkoutLinks.create.sizePlaceholder')}
-                  className="flex-1 px-3 py-2.5 bg-gray-50 border border-gray-200 rounded-lg text-gray-900 placeholder:text-gray-400 focus:outline-none focus:bg-white focus:border-gray-300 transition-colors"
+            <div className="space-y-2">
+              <Label>{t('checkoutLinks.create.size')} <span className="text-destructive">*</span></Label>
+              <div className="space-y-2">
+                {fields.map((field, index) => (
+                  <div key={field.id} className="flex gap-2">
+                    <Input
+                      type="text"
+                      {...register(`sizes.${index}` as const)}
+                      placeholder={t('checkoutLinks.create.sizePlaceholder')}
+                      className="flex-1"
+                    />
+                    {fields.length > 1 && (
+                      <Button
+                        type="button"
+                        variant="destructive"
+                        size="sm"
+                        onClick={() => remove(index)}
+                      >
+                        <X className="h-4 w-4" />
+                      </Button>
+                    )}
+                  </div>
+                ))}
+                <Button
+                  type="button"
+                  variant="outline"
+                  size="sm"
+                  onClick={() => append('')}
+                  className="w-full"
+                >
+                  <Plus className="h-4 w-4 mr-2" />
+                  {t('checkoutLinks.addAnotherSize')}
+                </Button>
+              </div>
+              {errors.sizes && (
+                <p className="text-sm text-destructive">
+                  {Array.isArray(errors.sizes)
+                    ? errors.sizes.find(e => e?.message)?.message
+                    : errors.sizes.message}
+                </p>
+              )}
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="imageUrl">{t('checkoutLinks.create.productImage')}</Label>
+              <Input
+                id="imageUrl"
+                type="url"
+                {...register('imageUrl')}
+                placeholder={t('checkoutLinks.create.productImagePlaceholder')}
+              />
+              {errors.imageUrl && (
+                <p className="text-sm text-destructive">{errors.imageUrl.message}</p>
+              )}
+              <p className="text-xs text-muted-foreground">
+                {t('checkoutLinks.create.productImageHelp')}
+              </p>
+            </div>
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardHeader>
+            <CardTitle>Pricing & Quantity</CardTitle>
+            <CardDescription>Set price and quantity limits</CardDescription>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <div className="grid gap-4 md:grid-cols-2">
+              <div className="space-y-2">
+                <Label htmlFor="price">
+                  {t('checkoutLinks.create.price')} <span className="text-destructive">*</span>
+                </Label>
+                <Input
+                  id="price"
+                  type="number"
+                  step="1"
+                  {...register('price', { valueAsNumber: true })}
                 />
-                {fields.length > 1 && (
-                  <button
-                    type="button"
-                    onClick={() => remove(index)}
-                    className="px-3 py-2 bg-red-50 text-red-600 rounded-lg hover:bg-red-100 transition-colors"
-                  >
-                    Remove
-                  </button>
+                {errors.price && (
+                  <p className="text-sm text-destructive">{errors.price.message}</p>
                 )}
               </div>
-            ))}
-            <button
-              type="button"
-              onClick={() => append('')}
-              className="text-sm text-blue-600 hover:text-blue-700 font-medium"
-            >
-              + {t('checkoutLinks.addAnotherSize')}
-            </button>
-          </div>
-          {errors.sizes && (
-            <p className="mt-1 text-sm text-red-600">
-              {Array.isArray(errors.sizes) 
-                ? errors.sizes.find(e => e?.message)?.message 
-                : errors.sizes.message}
-            </p>
-          )}
-        </div>
 
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
-            {t('checkoutLinks.create.productImage')}
-          </label>
-          <input
-            type="url"
-            {...register('imageUrl')}
-            placeholder={t('checkoutLinks.create.productImagePlaceholder')}
-            className="w-full px-3 py-2.5 bg-gray-50 border border-gray-200 rounded-lg text-gray-900 placeholder:text-gray-400 focus:outline-none focus:bg-white focus:border-gray-300 transition-colors"
-          />
-          {errors.imageUrl && (
-            <p className="mt-1 text-sm text-red-600">{errors.imageUrl.message}</p>
-          )}
-          <p className="mt-1 text-xs text-gray-500">
-            {t('checkoutLinks.create.productImageHelp')}
-          </p>
-        </div>
+              <div className="space-y-2">
+                <Label htmlFor="currency">{t('checkoutLinks.create.currency')}</Label>
+                <Input
+                  id="currency"
+                  type="text"
+                  {...register('currency')}
+                />
+              </div>
+            </div>
 
-        <div className="grid grid-cols-2 gap-4">
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              {t('checkoutLinks.create.price')} *
-            </label>
-            <input
-              type="number"
-              step="1"
-              {...register('price', { valueAsNumber: true })}
-              className="w-full px-3 py-2.5 bg-gray-50 border border-gray-200 rounded-lg text-gray-900 placeholder:text-gray-400 focus:outline-none focus:bg-white focus:border-gray-300 transition-colors"
-            />
-            {errors.price && (
-              <p className="mt-1 text-sm text-red-600">{errors.price.message}</p>
-            )}
-          </div>
+            <div className="grid gap-4 md:grid-cols-2">
+              <div className="space-y-2">
+                <Label htmlFor="defaultQty">{t('checkoutLinks.create.defaultQty')}</Label>
+                <Input
+                  id="defaultQty"
+                  type="number"
+                  step="1"
+                  {...register('defaultQty', { valueAsNumber: true })}
+                />
+              </div>
 
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              {t('checkoutLinks.create.currency')}
-            </label>
-            <input
-              type="text"
-              {...register('currency')}
-              className="w-full px-3 py-2.5 bg-gray-50 border border-gray-200 rounded-lg text-gray-900 placeholder:text-gray-400 focus:outline-none focus:bg-white focus:border-gray-300 transition-colors"
-            />
-          </div>
-        </div>
+              <div className="space-y-2">
+                <Label htmlFor="maxQty">{t('checkoutLinks.create.maxQty')}</Label>
+                <Input
+                  id="maxQty"
+                  type="number"
+                  step="1"
+                  {...register('maxQty', { valueAsNumber: true })}
+                />
+              </div>
+            </div>
+          </CardContent>
+        </Card>
 
-        <div className="grid grid-cols-2 gap-4">
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              {t('checkoutLinks.create.defaultQty')}
-            </label>
-            <input
-              type="number"
-              step="1"
-              {...register('defaultQty', { valueAsNumber: true })}
-              className="w-full px-3 py-2.5 bg-gray-50 border border-gray-200 rounded-lg text-gray-900 placeholder:text-gray-400 focus:outline-none focus:bg-white focus:border-gray-300 transition-colors"
-            />
-          </div>
+        <Card>
+          <CardHeader>
+            <CardTitle>Delivery & Payment</CardTitle>
+            <CardDescription>Configure delivery options and payment instructions</CardDescription>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <div className="space-y-3">
+              <Label>
+                {t('checkoutLinks.create.deliveryOptions')} <span className="text-destructive">*</span>
+              </Label>
+              <div className="space-y-3">
+                <label className="flex items-center gap-3 cursor-pointer">
+                  <input
+                    type="checkbox"
+                    {...register('deliveryOptions.courierCity')}
+                    className="h-4 w-4 rounded border-input"
+                  />
+                  <span className="text-sm">{t('checkoutLinks.create.courierCity')}</span>
+                </label>
+                <label className="flex items-center gap-3 cursor-pointer">
+                  <input
+                    type="checkbox"
+                    {...register('deliveryOptions.pickup')}
+                    className="h-4 w-4 rounded border-input"
+                  />
+                  <span className="text-sm">{t('checkoutLinks.create.pickup')}</span>
+                </label>
+                <label className="flex items-center gap-3 cursor-pointer">
+                  <input
+                    type="checkbox"
+                    {...register('deliveryOptions.region')}
+                    className="h-4 w-4 rounded border-input"
+                  />
+                  <span className="text-sm">{t('checkoutLinks.create.regionDelivery')}</span>
+                </label>
+              </div>
+              {(!deliveryOptions?.courierCity &&
+                !deliveryOptions?.pickup &&
+                !deliveryOptions?.region) && (
+                <p className="text-sm text-destructive">
+                  {t('checkoutLinks.create.deliveryError')}
+                </p>
+              )}
+            </div>
 
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              {t('checkoutLinks.create.maxQty')}
-            </label>
-            <input
-              type="number"
-              step="1"
-              {...register('maxQty', { valueAsNumber: true })}
-              className="w-full px-3 py-2.5 bg-gray-50 border border-gray-200 rounded-lg text-gray-900 placeholder:text-gray-400 focus:outline-none focus:bg-white focus:border-gray-300 transition-colors"
-            />
-          </div>
-        </div>
-
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
-            {t('checkoutLinks.create.deliveryOptions')} *
-          </label>
-          <div className="space-y-3">
-            <label className="flex items-center cursor-pointer">
-              <input
-                type="checkbox"
-                {...register('deliveryOptions.courierCity')}
-                className="w-4 h-4 text-blue-400 bg-transparent border-gray-100 rounded focus:ring-0 focus:border-gray-200 transition-colors cursor-pointer hover:border-gray-200"
+            <div className="space-y-2">
+              <Label htmlFor="paymentNote">
+                {t('checkoutLinks.create.paymentNote')} <span className="text-destructive">*</span>
+              </Label>
+              <Textarea
+                id="paymentNote"
+                {...register('paymentNote')}
+                rows={4}
+                placeholder={t('checkoutLinks.create.paymentNotePlaceholder')}
               />
-              <span className="ml-3 text-sm text-gray-700">{t('checkoutLinks.create.courierCity')}</span>
-            </label>
-            <label className="flex items-center cursor-pointer">
-              <input
-                type="checkbox"
-                {...register('deliveryOptions.pickup')}
-                className="w-4 h-4 text-blue-400 bg-transparent border-gray-100 rounded focus:ring-0 focus:border-gray-200 transition-colors cursor-pointer hover:border-gray-200"
-              />
-              <span className="ml-3 text-sm text-gray-700">{t('checkoutLinks.create.pickup')}</span>
-            </label>
-            <label className="flex items-center cursor-pointer">
-              <input
-                type="checkbox"
-                {...register('deliveryOptions.region')}
-                className="w-4 h-4 text-blue-400 bg-transparent border-gray-100 rounded focus:ring-0 focus:border-gray-200 transition-colors cursor-pointer hover:border-gray-200"
-              />
-              <span className="ml-3 text-sm text-gray-700">{t('checkoutLinks.create.regionDelivery')}</span>
-            </label>
-          </div>
-          {(!deliveryOptions?.courierCity &&
-            !deliveryOptions?.pickup &&
-            !deliveryOptions?.region) && (
-            <p className="mt-1 text-sm text-red-600">
-              {t('checkoutLinks.create.deliveryError')}
-            </p>
-          )}
-        </div>
-
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
-            {t('checkoutLinks.create.paymentNote')} *
-          </label>
-          <textarea
-            {...register('paymentNote')}
-            rows={4}
-            placeholder={t('checkoutLinks.create.paymentNotePlaceholder')}
-            className="w-full px-3 py-2.5 bg-gray-50 border border-gray-200 rounded-lg text-gray-900 placeholder:text-gray-400 focus:outline-none focus:bg-white focus:border-gray-300 transition-colors"
-          />
-          {errors.paymentNote && (
-            <p className="mt-1 text-sm text-red-600">{errors.paymentNote.message}</p>
-          )}
-        </div>
+              {errors.paymentNote && (
+                <p className="text-sm text-destructive">{errors.paymentNote.message}</p>
+              )}
+            </div>
+          </CardContent>
+        </Card>
 
         <div className="flex gap-4">
-          <button
-            type="submit"
-            disabled={loading}
-            className="bg-blue-600 text-white px-6 py-2 rounded-md font-medium hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed"
-          >
+          <Button type="submit" disabled={loading}>
             {loading ? t('checkoutLinks.create.submitting') : t('checkoutLinks.create.submit')}
-          </button>
-          <button
+          </Button>
+          <Button
             type="button"
+            variant="outline"
             onClick={() => router.push('/checkout-links')}
-            className="bg-gray-200 text-gray-800 px-6 py-2 rounded-md font-medium hover:bg-gray-300"
           >
             {t('common.cancel')}
-          </button>
+          </Button>
         </div>
       </form>
     </div>

@@ -5,6 +5,19 @@ import { useRouter } from '@/i18n/routing'
 import { authenticatedFetch } from '@/lib/api'
 import { useTranslations } from 'next-intl'
 import { LoadingPage } from '@/components/ui/loading-spinner'
+import { Badge } from '@/components/ui/badge'
+import { Button } from '@/components/ui/button'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { Label } from '@/components/ui/label'
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select'
+import { ArrowLeft, Phone, MapPin, User, Package } from 'lucide-react'
+import { Separator } from '@/components/ui/separator'
 
 interface Order {
   id: string
@@ -109,146 +122,165 @@ export default function OrderDetailPage({ params }: { params: { id: string } }) 
   }
 
   return (
-    <div>
-      <div className="flex items-center gap-4 mb-6">
-        <button
-          onClick={() => router.back()}
-          className="text-gray-600 hover:text-gray-900"
-        >
-          ← {tCommon('back')}
-        </button>
-        <h1 className="text-2xl font-bold">{t('title')}</h1>
+    <div className="space-y-6">
+      <div className="flex items-center gap-4">
+        <Button variant="ghost" size="sm" onClick={() => router.back()}>
+          <ArrowLeft className="h-4 w-4 mr-2" />
+          {tCommon('back')}
+        </Button>
+        <div>
+          <h1 className="text-3xl font-bold tracking-tight">{t('title')}</h1>
+          <p className="text-sm text-muted-foreground mt-1">
+            Order #{order.id.slice(0, 8)}...
+          </p>
+        </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className="grid gap-6 md:grid-cols-2">
         {/* Order Information */}
-        <div className="bg-white rounded-lg shadow p-6">
-          <h2 className="text-lg font-semibold mb-4">{t('orderInfo')}</h2>
-          <dl className="space-y-3">
-            <div>
-              <dt className="text-sm font-medium text-gray-500">{t('orderNumber')}</dt>
-              <dd className="mt-1 text-sm text-gray-900 font-mono">{order.id}</dd>
-            </div>
-            <div>
-              <dt className="text-sm font-medium text-gray-500">{t('createdAt')}</dt>
-              <dd className="mt-1 text-sm text-gray-900">
+        <Card>
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <Package className="h-5 w-5" />
+              {t('orderInfo')}
+            </CardTitle>
+            <CardDescription>Details about this order</CardDescription>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <div className="grid gap-2">
+              <Label className="text-muted-foreground">{t('createdAt')}</Label>
+              <p className="text-sm font-medium">
                 {new Date(order.createdAt).toLocaleString()}
-              </dd>
+              </p>
             </div>
-            <div>
-              <dt className="text-sm font-medium text-gray-500">{t('product')}</dt>
-              <dd className="mt-1 text-sm text-gray-900">{order.checkoutLink.name}</dd>
+            <Separator />
+            <div className="grid gap-2">
+              <Label className="text-muted-foreground">{t('product')}</Label>
+              <p className="text-sm font-medium">{order.checkoutLink.name}</p>
             </div>
-            <div>
-              <dt className="text-sm font-medium text-gray-500">{t('size')}</dt>
-              <dd className="mt-1">
-                <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-blue-100 text-blue-800">
-                  {order.selectedSize}
-                </span>
-              </dd>
+            <div className="grid gap-2">
+              <Label className="text-muted-foreground">{t('size')}</Label>
+              <Badge variant="secondary">{order.selectedSize}</Badge>
             </div>
-            <div>
-              <dt className="text-sm font-medium text-gray-500">{t('quantity')}</dt>
-              <dd className="mt-1 text-sm text-gray-900">{order.quantity}</dd>
+            <div className="grid gap-2">
+              <Label className="text-muted-foreground">{t('quantity')}</Label>
+              <p className="text-sm font-medium">{order.quantity}</p>
             </div>
-            <div>
-              <dt className="text-sm font-medium text-gray-500">{t('totalPrice')}</dt>
-              <dd className="mt-1 text-lg font-bold text-gray-900">
+            <Separator />
+            <div className="grid gap-2">
+              <Label className="text-muted-foreground">{t('totalPrice')}</Label>
+              <p className="text-2xl font-bold">
                 {order.totalPrice.toLocaleString()} {order.checkoutLink.currency}
-              </dd>
+              </p>
             </div>
-            <div>
-              <dt className="text-sm font-medium text-gray-500">{t('deliveryMethod')}</dt>
-              <dd className="mt-1 text-sm text-gray-900 capitalize">
+            <div className="grid gap-2">
+              <Label className="text-muted-foreground">{t('deliveryMethod')}</Label>
+              <p className="text-sm font-medium capitalize">
                 {order.deliveryMethod.replace('_', ' ')}
-              </dd>
+              </p>
             </div>
-          </dl>
-        </div>
+          </CardContent>
+        </Card>
 
         {/* Buyer Information */}
-        <div className="bg-white rounded-lg shadow p-6">
-          <h2 className="text-lg font-semibold mb-4">{t('buyerInfo')}</h2>
-          <dl className="space-y-3">
-            <div>
-              <dt className="text-sm font-medium text-gray-500">{t('fullName')}</dt>
-              <dd className="mt-1 text-sm text-gray-900">{order.contactSnapshot.fullName}</dd>
+        <Card>
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <User className="h-5 w-5" />
+              {t('buyerInfo')}
+            </CardTitle>
+            <CardDescription>Customer contact information</CardDescription>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <div className="grid gap-2">
+              <Label className="text-muted-foreground">{t('fullName')}</Label>
+              <p className="text-sm font-medium">{order.contactSnapshot.fullName}</p>
             </div>
-            <div>
-              <dt className="text-sm font-medium text-gray-500">{t('phone')}</dt>
-              <dd className="mt-1 text-sm text-gray-900">
-                <a href={`tel:${order.contactSnapshot.phone}`} className="text-blue-600 hover:underline">
+            <Separator />
+            <div className="grid gap-2">
+              <Label className="text-muted-foreground flex items-center gap-2">
+                <Phone className="h-4 w-4" />
+                {t('phone')}
+              </Label>
+              <Button variant="link" asChild className="p-0 h-auto justify-start">
+                <a href={`tel:${order.contactSnapshot.phone}`}>
                   {order.contactSnapshot.phone}
                 </a>
-              </dd>
+              </Button>
             </div>
             {order.contactSnapshot.username && (
-              <div>
-                <dt className="text-sm font-medium text-gray-500">{t('telegram')}</dt>
-                <dd className="mt-1 text-sm text-gray-900">
+              <div className="grid gap-2">
+                <Label className="text-muted-foreground">{t('telegram')}</Label>
+                <Button variant="link" asChild className="p-0 h-auto justify-start">
                   <a
                     href={`https://t.me/${order.contactSnapshot.username.replace('@', '')}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-blue-600 hover:underline"
                   >
                     {order.contactSnapshot.username}
                   </a>
-                </dd>
+                </Button>
               </div>
             )}
-            <div>
-              <dt className="text-sm font-medium text-gray-500">{t('city')}</dt>
-              <dd className="mt-1 text-sm text-gray-900">{order.contactSnapshot.city}</dd>
+            <Separator />
+            <div className="grid gap-2">
+              <Label className="text-muted-foreground flex items-center gap-2">
+                <MapPin className="h-4 w-4" />
+                {t('city')}
+              </Label>
+              <p className="text-sm font-medium">{order.contactSnapshot.city}</p>
             </div>
-            <div>
-              <dt className="text-sm font-medium text-gray-500">{t('address')}</dt>
-              <dd className="mt-1 text-sm text-gray-900">{order.contactSnapshot.address}</dd>
+            <div className="grid gap-2">
+              <Label className="text-muted-foreground">{t('address')}</Label>
+              <p className="text-sm font-medium">{order.contactSnapshot.address}</p>
             </div>
-          </dl>
-        </div>
+          </CardContent>
+        </Card>
 
         {/* Status Update */}
-        <div className="bg-white rounded-lg shadow p-6 md:col-span-2">
-          <h2 className="text-lg font-semibold mb-4">{t('statuses')}</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                {t('paymentStatus')}
-              </label>
-              <select
-                value={paymentStatus}
-                onChange={(e) => setPaymentStatus(e.target.value)}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-              >
-                <option value="new">{t('paymentStatuses.pending')}</option>
-                <option value="paid">{t('paymentStatuses.paid')}</option>
-                <option value="cancelled">{t('paymentStatuses.cancelled')}</option>
-              </select>
+        <Card className="md:col-span-2">
+          <CardHeader>
+            <CardTitle>{t('statuses')}</CardTitle>
+            <CardDescription>Update order payment and delivery status</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div className="grid gap-6 md:grid-cols-2">
+              <div className="space-y-2">
+                <Label htmlFor="paymentStatus">{t('paymentStatus')}</Label>
+                <Select value={paymentStatus} onValueChange={setPaymentStatus}>
+                  <SelectTrigger id="paymentStatus">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="new">{t('paymentStatuses.pending')}</SelectItem>
+                    <SelectItem value="paid">{t('paymentStatuses.paid')}</SelectItem>
+                    <SelectItem value="cancelled">{t('paymentStatuses.cancelled')}</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="deliveryStatus">{t('deliveryStatus')}</Label>
+                <Select value={deliveryStatus} onValueChange={setDeliveryStatus}>
+                  <SelectTrigger id="deliveryStatus">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="pending">{t('deliveryStatuses.pending')}</SelectItem>
+                    <SelectItem value="sent">{t('deliveryStatuses.sent')}</SelectItem>
+                    <SelectItem value="delivered">{t('deliveryStatuses.delivered')}</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
             </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                {t('deliveryStatus')}
-              </label>
-              <select
-                value={deliveryStatus}
-                onChange={(e) => setDeliveryStatus(e.target.value)}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-              >
-                <option value="pending">{t('deliveryStatuses.pending')}</option>
-                <option value="sent">{t('deliveryStatuses.sent')}</option>
-                <option value="delivered">{t('deliveryStatuses.delivered')}</option>
-              </select>
-            </div>
-          </div>
-          <button
-            onClick={handleUpdateStatus}
-            disabled={updating || (paymentStatus === order.paymentStatus && deliveryStatus === order.deliveryStatus)}
-            className="mt-4 bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed"
-          >
-            {updating ? tCommon('loading') : t('updateStatus')}
-          </button>
-        </div>
+            <Button
+              onClick={handleUpdateStatus}
+              disabled={updating || (paymentStatus === order.paymentStatus && deliveryStatus === order.deliveryStatus)}
+              className="mt-6"
+            >
+              {updating ? tCommon('loading') : t('updateStatus')}
+            </Button>
+          </CardContent>
+        </Card>
       </div>
     </div>
   )

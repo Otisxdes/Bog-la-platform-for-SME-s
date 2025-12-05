@@ -5,6 +5,12 @@ import { useRouter, Link } from '@/i18n/routing'
 import { authenticatedFetch } from '@/lib/api'
 import { useTranslations } from 'next-intl'
 import { LoadingPage } from '@/components/ui/loading-spinner'
+import { Badge } from '@/components/ui/badge'
+import { Button } from '@/components/ui/button'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { Label } from '@/components/ui/label'
+import { Separator } from '@/components/ui/separator'
+import { ArrowLeft, Phone, MapPin, User, Calendar, ShoppingBag } from 'lucide-react'
 
 interface Order {
   id: string
@@ -64,126 +70,161 @@ export default function CustomerDetailPage({ params }: { params: { id: string } 
     return (
       <div className="bg-red-50 border border-red-200 rounded-md p-4">
         <p className="text-red-800">{error || t('customerNotFound')}</p>
-        <button
+        <Button
+          variant="link"
           onClick={() => router.back()}
-          className="mt-4 text-blue-600 hover:text-blue-900"
+          className="mt-4 p-0 h-auto"
         >
           {t('goBack')}
-        </button>
+        </Button>
       </div>
     )
   }
 
   return (
-    <div>
-      <div className="flex justify-between items-center mb-6">
-        <h1 className="text-2xl font-bold">{t('title')}</h1>
-        <button
-          onClick={() => router.back()}
-          className="text-gray-600 hover:text-gray-900"
-        >
+    <div className="space-y-6">
+      <div className="flex items-center gap-4">
+        <Button variant="ghost" size="sm" onClick={() => router.back()}>
+          <ArrowLeft className="h-4 w-4 mr-2" />
           {t('backToCustomers')}
-        </button>
+        </Button>
+        <div>
+          <h1 className="text-3xl font-bold tracking-tight">{t('title')}</h1>
+          <p className="text-sm text-muted-foreground mt-1">
+            Customer #{customer.id.slice(0, 8)}...
+          </p>
+        </div>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div className="grid gap-6 md:grid-cols-2">
         {/* Customer Information */}
-        <div className="bg-white rounded-lg shadow p-6">
-          <h2 className="text-lg font-semibold mb-4">{t('customerInformation')}</h2>
-          <div className="space-y-3">
-            <div>
-              <span className="text-sm text-gray-600">{t('fullName')}</span>
-              <span className="ml-2 font-medium">{customer.fullName}</span>
+        <Card>
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <User className="h-5 w-5" />
+              {t('customerInformation')}
+            </CardTitle>
+            <CardDescription>Personal details and contact information</CardDescription>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <div className="grid gap-2">
+              <Label className="text-muted-foreground">{t('fullName')}</Label>
+              <p className="text-sm font-medium">{customer.fullName}</p>
             </div>
-            <div>
-              <span className="text-sm text-gray-600">{t('phone')}</span>
-              <span className="ml-2 font-medium">{customer.phone}</span>
-            </div>
-            <div>
-              <span className="text-sm text-gray-600">{t('city')}</span>
-              <span className="ml-2 font-medium">{customer.city || '-'}</span>
-            </div>
-            <div>
-              <span className="text-sm text-gray-600">{t('address')}</span>
-              <span className="ml-2 font-medium">{customer.address || '-'}</span>
+            <Separator />
+            <div className="grid gap-2">
+              <Label className="text-muted-foreground flex items-center gap-2">
+                <Phone className="h-4 w-4" />
+                {t('phone')}
+              </Label>
+              <Button variant="link" asChild className="p-0 h-auto justify-start">
+                <a href={`tel:${customer.phone}`}>
+                  {customer.phone}
+                </a>
+              </Button>
             </div>
             {customer.username && (
-              <div>
-                <span className="text-sm text-gray-600">{t('username')}</span>
-                <span className="ml-2 font-medium">{customer.username}</span>
+              <div className="grid gap-2">
+                <Label className="text-muted-foreground">{t('username')}</Label>
+                <Button variant="link" asChild className="p-0 h-auto justify-start">
+                  <a
+                    href={`https://t.me/${customer.username.replace('@', '')}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {customer.username}
+                  </a>
+                </Button>
               </div>
             )}
-            <div>
-              <span className="text-sm text-gray-600">{t('marketingOptIn')}</span>
-              <span className="ml-2">
-                <span
-                  className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${
-                    customer.marketingOptIn
-                      ? 'bg-green-100 text-green-800'
-                      : 'bg-gray-100 text-gray-800'
-                  }`}
-                >
-                  {customer.marketingOptIn ? tCustomers('yes') : tCustomers('no')}
-                </span>
-              </span>
+            <Separator />
+            <div className="grid gap-2">
+              <Label className="text-muted-foreground flex items-center gap-2">
+                <MapPin className="h-4 w-4" />
+                {t('city')}
+              </Label>
+              <p className="text-sm font-medium">{customer.city || '-'}</p>
             </div>
-            <div>
-              <span className="text-sm text-gray-600">{t('customerSince')}</span>
-              <span className="ml-2 font-medium">
+            <div className="grid gap-2">
+              <Label className="text-muted-foreground">{t('address')}</Label>
+              <p className="text-sm font-medium">{customer.address || '-'}</p>
+            </div>
+            <Separator />
+            <div className="grid gap-2">
+              <Label className="text-muted-foreground">{t('marketingOptIn')}</Label>
+              <Badge variant={customer.marketingOptIn ? 'default' : 'outline'}>
+                {customer.marketingOptIn ? tCustomers('yes') : tCustomers('no')}
+              </Badge>
+            </div>
+            <div className="grid gap-2">
+              <Label className="text-muted-foreground flex items-center gap-2">
+                <Calendar className="h-4 w-4" />
+                {t('customerSince')}
+              </Label>
+              <p className="text-sm font-medium">
                 {new Date(customer.createdAt).toLocaleDateString()}
-              </span>
+              </p>
             </div>
             {customer.lastUsedAt && (
-              <div>
-                <span className="text-sm text-gray-600">{t('lastOrder')}</span>
-                <span className="ml-2 font-medium">
+              <div className="grid gap-2">
+                <Label className="text-muted-foreground">{t('lastOrder')}</Label>
+                <p className="text-sm font-medium">
                   {new Date(customer.lastUsedAt).toLocaleDateString()}
-                </span>
+                </p>
               </div>
             )}
-            <div>
-              <span className="text-sm text-gray-600">{t('totalOrders')}</span>
-              <span className="ml-2 font-medium">{customer._count.orders}</span>
+            <div className="grid gap-2">
+              <Label className="text-muted-foreground">{t('totalOrders')}</Label>
+              <Badge variant="secondary">{customer._count.orders}</Badge>
             </div>
-          </div>
-        </div>
+          </CardContent>
+        </Card>
 
         {/* Order History */}
-        <div className="bg-white rounded-lg shadow p-6">
-          <h2 className="text-lg font-semibold mb-4">{t('orderHistory')}</h2>
-          {customer.orders.length === 0 ? (
-            <p className="text-gray-500">{t('noOrders')}</p>
-          ) : (
-            <div className="space-y-4">
-              {customer.orders.map((order) => (
-                <div
-                  key={order.id}
-                  className="border border-gray-200 rounded-md p-4 hover:bg-gray-50"
-                >
-                  <div className="flex justify-between items-start mb-2">
-                    <div>
-                      <Link
-                        href={`/orders/${order.id}`}
-                        className="font-medium text-blue-600 hover:text-blue-900"
-                      >
-                        {order.checkoutLink.name}
-                      </Link>
-                      <p className="text-sm text-gray-500">
-                        {new Date(order.createdAt).toLocaleString()}
-                      </p>
-                    </div>
-                    <div className="text-right">
-                      <p className="font-semibold">
-                        {order.totalPrice.toLocaleString()} UZS
-                      </p>
-                      <p className="text-sm text-gray-500">{t('quantity')} {order.quantity}</p>
+        <Card className="md:col-span-1">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <ShoppingBag className="h-5 w-5" />
+              {t('orderHistory')}
+            </CardTitle>
+            <CardDescription>Complete purchase history for this customer</CardDescription>
+          </CardHeader>
+          <CardContent>
+            {customer.orders.length === 0 ? (
+              <p className="text-muted-foreground text-center py-8">{t('noOrders')}</p>
+            ) : (
+              <div className="space-y-4">
+                {customer.orders.map((order) => (
+                  <div
+                    key={order.id}
+                    className="border border-border rounded-lg p-4 hover:bg-muted/50 transition-colors"
+                  >
+                    <div className="flex justify-between items-start">
+                      <div className="space-y-1">
+                        <Button variant="link" asChild className="p-0 h-auto">
+                          <Link href={`/orders/${order.id}`}>
+                            {order.checkoutLink.name}
+                          </Link>
+                        </Button>
+                        <p className="text-xs text-muted-foreground">
+                          {new Date(order.createdAt).toLocaleString()}
+                        </p>
+                      </div>
+                      <div className="text-right space-y-1">
+                        <p className="text-sm font-semibold">
+                          {order.totalPrice.toLocaleString()} UZS
+                        </p>
+                        <p className="text-xs text-muted-foreground">
+                          {t('quantity')} {order.quantity}
+                        </p>
+                      </div>
                     </div>
                   </div>
-                </div>
-              ))}
-            </div>
-          )}
-        </div>
+                ))}
+              </div>
+            )}
+          </CardContent>
+        </Card>
       </div>
     </div>
   )
