@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import { useRouter, Link } from '@/i18n/routing'
 import { authenticatedFetch } from '@/lib/api'
 import { useTranslations } from 'next-intl'
+import { LoadingPage } from '@/components/ui/loading-spinner'
 
 interface Order {
   id: string
@@ -56,11 +57,7 @@ export default function CustomerDetailPage({ params }: { params: { id: string } 
   }, [params.id])
 
   if (loading) {
-    return (
-      <div className="flex items-center justify-center h-64">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-gray-900"></div>
-      </div>
-    )
+    return <LoadingPage />
   }
 
   if (error || !customer) {

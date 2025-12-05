@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import { useSearchParams } from 'next/navigation'
 import { useRouter, Link } from '@/i18n/routing'
 import { useTranslations } from 'next-intl'
+import { LoadingPage } from '@/components/ui/loading-spinner'
 
 interface Order {
   id: string
@@ -84,14 +85,7 @@ export default function SuccessPage({
   }
 
   if (loading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-gray-900 mx-auto"></div>
-          <p className="mt-4 text-gray-600">Loading...</p>
-        </div>
-      </div>
-    )
+    return <LoadingPage />
   }
 
   if (error || !order) {

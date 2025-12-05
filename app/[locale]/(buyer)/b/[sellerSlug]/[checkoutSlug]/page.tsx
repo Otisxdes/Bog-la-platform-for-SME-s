@@ -8,6 +8,7 @@ import { useLocalStorage } from '@/lib/hooks/useLocalStorage'
 import { useRouter } from '@/i18n/routing'
 import { useTranslations } from 'next-intl'
 import { ChevronLeft } from 'lucide-react'
+import { LoadingPage } from '@/components/ui/loading-spinner'
 
 const uzbekCities = [
   'Tashkent',
@@ -217,14 +218,7 @@ export default function CheckoutPage({
   }
 
   if (loading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto"></div>
-          <p className="mt-4 text-gray-500">{t('loading')}</p>
-        </div>
-      </div>
-    )
+    return <LoadingPage message={t('loading')} />
   }
 
   if (error && !checkoutLink) {
