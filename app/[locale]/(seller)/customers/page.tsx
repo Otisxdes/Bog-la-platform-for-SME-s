@@ -69,7 +69,7 @@ export default function CustomersPage() {
         </p>
       </div>
 
-      <div className="rounded-xl border bg-card">
+      <div className="rounded-lg border bg-card">
         <Table>
           <TableHeader>
             <TableRow>
