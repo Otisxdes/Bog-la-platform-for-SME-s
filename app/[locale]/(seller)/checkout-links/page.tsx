@@ -4,8 +4,18 @@ import { useEffect, useState } from 'react'
 import { authenticatedFetch } from '@/lib/api'
 import { Link } from '@/i18n/routing'
 import { useTranslations } from 'next-intl'
-import { Pencil, Trash2, ExternalLink, Copy, Check } from 'lucide-react'
+import { Pencil, Trash2, ExternalLink, Copy, Check, Plus } from 'lucide-react'
 import { LoadingPage } from '@/components/ui/loading-spinner'
+import { Button } from '@/components/ui/button'
+import { Badge } from '@/components/ui/badge'
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '@/components/ui/table'
 
 interface CheckoutLink {
   id: string
@@ -91,130 +101,127 @@ export default function CheckoutLinksPage() {
   }
 
   return (
-    <div>
-      <div className="flex justify-between items-center mb-6">
-        <h1 className="text-2xl font-bold">{t('title')}</h1>
-        <Link
-          href="/checkout-links/new"
-          className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700"
-        >
-          {t('newButton')}
-        </Link>
+    <div className="space-y-6">
+      <div className="flex justify-between items-center">
+        <div>
+          <h1 className="text-3xl font-bold tracking-tight">{t('title')}</h1>
+          <p className="text-muted-foreground mt-1">
+            Create and manage payment links for your products
+          </p>
+        </div>
+        <Button asChild>
+          <Link href="/checkout-links/new">
+            <Plus className="mr-2 h-4 w-4" />
+            {t('newButton')}
+          </Link>
+        </Button>
       </div>
 
-      <div className="bg-white rounded-lg shadow overflow-hidden">
-        <table className="min-w-full divide-y divide-gray-200">
-          <thead className="bg-gray-50">
-            <tr>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                {t('table.name')}
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                {t('table.sizes')}
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                {t('table.url')}
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                {t('table.createdDate')}
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                {t('table.ordersCount')}
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                {t('table.actions')}
-              </th>
-            </tr>
-          </thead>
-          <tbody className="bg-white divide-y divide-gray-200">
+      <div className="rounded-xl border bg-card">
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead>{t('table.name')}</TableHead>
+              <TableHead>{t('table.sizes')}</TableHead>
+              <TableHead>{t('table.url')}</TableHead>
+              <TableHead>{t('table.createdDate')}</TableHead>
+              <TableHead>{t('table.ordersCount')}</TableHead>
+              <TableHead className="text-right">{t('table.actions')}</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
             {links.length === 0 ? (
-              <tr>
-                <td colSpan={6} className="px-6 py-4 text-center text-gray-500">
-                  {t('noLinks')}
-                </td>
-              </tr>
+              <TableRow>
+                <TableCell colSpan={6} className="h-24 text-center">
+                  <p className="text-muted-foreground">{t('noLinks')}</p>
+                </TableCell>
+              </TableRow>
             ) : (
               links.map((link) => {
                 const sizes = JSON.parse(link.sizes || '[]')
                 return (
-                  <tr key={link.id}>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                      {link.name}
-                    </td>
-                    <td className="px-6 py-4 text-sm text-gray-500">
+                  <TableRow key={link.id}>
+                    <TableCell className="font-medium">{link.name}</TableCell>
+                    <TableCell>
                       <div className="flex flex-wrap gap-1">
                         {sizes.map((size: string, idx: number) => (
-                          <span
-                            key={idx}
-                            className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-blue-100 text-blue-800"
-                          >
+                          <Badge key={idx} variant="secondary">
                             {size}
-                          </span>
+                          </Badge>
                         ))}
                       </div>
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                      <div className="flex items-center gap-3">
-                        <a
-                          href={`/b/${sellerSlug}/${link.slug}`}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-blue-600 hover:text-blue-900 inline-flex items-center gap-1"
+                    </TableCell>
+                    <TableCell>
+                      <div className="flex items-center gap-2">
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          asChild
                         >
-                          <ExternalLink className="h-4 w-4" />
-                          {t('preview')}
-                        </a>
-                        <span className="text-gray-300">|</span>
-                        <button
+                          <a
+                            href={`/b/${sellerSlug}/${link.slug}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            <ExternalLink className="h-4 w-4 mr-1" />
+                            {t('preview')}
+                          </a>
+                        </Button>
+                        <Button
+                          variant="ghost"
+                          size="sm"
                           onClick={() => handleCopyLink(link.slug, link.id)}
-                          className="text-gray-600 hover:text-gray-900 inline-flex items-center gap-1"
                         >
                           {copiedId === link.id ? (
                             <>
-                              <Check className="h-4 w-4 text-green-600" />
+                              <Check className="h-4 w-4 mr-1 text-green-600" />
                               <span className="text-green-600">{t('copied')}</span>
                             </>
                           ) : (
                             <>
-                              <Copy className="h-4 w-4" />
+                              <Copy className="h-4 w-4 mr-1" />
                               {t('copyLink')}
                             </>
                           )}
-                        </button>
+                        </Button>
                       </div>
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    </TableCell>
+                    <TableCell className="text-muted-foreground">
                       {new Date(link.createdAt).toLocaleDateString()}
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    </TableCell>
+                    <TableCell className="text-muted-foreground">
                       {link._count.orders}
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                      <div className="flex items-center gap-3">
-                        <Link
-                          href={`/checkout-links/${link.id}/edit`}
-                          className="text-blue-600 hover:text-blue-900 inline-flex items-center gap-1"
+                    </TableCell>
+                    <TableCell className="text-right">
+                      <div className="flex items-center justify-end gap-2">
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          asChild
                         >
-                          <Pencil className="h-4 w-4" />
-                          {t('edit')}
-                        </Link>
-                        <span className="text-gray-300">|</span>
-                        <button
+                          <Link href={`/checkout-links/${link.id}/edit`}>
+                            <Pencil className="h-4 w-4 mr-1" />
+                            {t('edit')}
+                          </Link>
+                        </Button>
+                        <Button
+                          variant="ghost"
+                          size="sm"
                           onClick={() => handleDelete(link.id, link.name)}
                           disabled={deleting === link.id}
-                          className="text-red-600 hover:text-red-900 inline-flex items-center gap-1 disabled:opacity-50"
+                          className="text-destructive hover:text-destructive"
                         >
-                          <Trash2 className="h-4 w-4" />
+                          <Trash2 className="h-4 w-4 mr-1" />
                           {deleting === link.id ? t('deleting') : t('delete')}
-                        </button>
+                        </Button>
                       </div>
-                    </td>
-                  </tr>
+                    </TableCell>
+                  </TableRow>
                 )
               })
             )}
-          </tbody>
-        </table>
+          </TableBody>
+        </Table>
       </div>
     </div>
   )

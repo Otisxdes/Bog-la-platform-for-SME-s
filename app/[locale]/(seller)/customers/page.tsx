@@ -5,6 +5,16 @@ import { authenticatedFetch } from '@/lib/api'
 import { Link } from '@/i18n/routing'
 import { useTranslations } from 'next-intl'
 import { LoadingPage } from '@/components/ui/loading-spinner'
+import { Badge } from '@/components/ui/badge'
+import { Button } from '@/components/ui/button'
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '@/components/ui/table'
 
 interface Customer {
   id: string
@@ -51,87 +61,73 @@ export default function CustomersPage() {
   }
 
   return (
-    <div>
-      <h1 className="text-2xl font-bold mb-6">{t('title')}</h1>
+    <div className="space-y-6">
+      <div>
+        <h1 className="text-3xl font-bold tracking-tight">{t('title')}</h1>
+        <p className="text-muted-foreground mt-1">
+          Manage your customer database and preferences
+        </p>
+      </div>
 
-      <div className="bg-white rounded-lg shadow overflow-hidden">
-        <table className="min-w-full divide-y divide-gray-200">
-          <thead className="bg-gray-50">
-            <tr>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                {t('buyerName')}
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                {t('phone')}
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                {t('city')}
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                {t('totalOrders')}
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                {t('lastOrderDate')}
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                {t('marketingOptIn')}
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                {t('actions')}
-              </th>
-            </tr>
-          </thead>
-          <tbody className="bg-white divide-y divide-gray-200">
+      <div className="rounded-xl border bg-card">
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead>{t('buyerName')}</TableHead>
+              <TableHead>{t('phone')}</TableHead>
+              <TableHead>{t('city')}</TableHead>
+              <TableHead>{t('totalOrders')}</TableHead>
+              <TableHead>{t('lastOrderDate')}</TableHead>
+              <TableHead>{t('marketingOptIn')}</TableHead>
+              <TableHead className="text-right">{t('actions')}</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
             {customers.length === 0 ? (
-              <tr>
-                <td colSpan={7} className="px-6 py-4 text-center text-gray-500">
-                  {t('noCustomers')}
-                </td>
-              </tr>
+              <TableRow>
+                <TableCell colSpan={7} className="h-24 text-center">
+                  <p className="text-muted-foreground">{t('noCustomers')}</p>
+                </TableCell>
+              </TableRow>
             ) : (
               customers.map((customer) => (
-                <tr key={customer.id} className="hover:bg-gray-50 cursor-pointer">
-                  <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                <TableRow key={customer.id}>
+                  <TableCell className="font-medium">
                     {customer.fullName}
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                  </TableCell>
+                  <TableCell className="text-muted-foreground">
                     {customer.phone}
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                  </TableCell>
+                  <TableCell className="text-muted-foreground">
                     {customer.city || '-'}
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    {customer.totalOrders}
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                  </TableCell>
+                  <TableCell>
+                    <Badge variant="secondary">{customer.totalOrders}</Badge>
+                  </TableCell>
+                  <TableCell className="text-muted-foreground">
                     {customer.lastOrderDate
                       ? new Date(customer.lastOrderDate).toLocaleDateString()
                       : '-'}
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    <span
-                      className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${
-                        customer.marketingOptIn
-                          ? 'bg-green-100 text-green-800'
-                          : 'bg-gray-100 text-gray-800'
-                      }`}
+                  </TableCell>
+                  <TableCell>
+                    <Badge
+                      variant={customer.marketingOptIn ? 'default' : 'outline'}
                     >
                       {customer.marketingOptIn ? t('yes') : t('no')}
-                    </span>
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                    <Link
-                      href={`/customers/${customer.id}`}
-                      className="text-blue-600 hover:text-blue-900"
-                    >
-                      {t('view')}
-                    </Link>
-                  </td>
-                </tr>
+                    </Badge>
+                  </TableCell>
+                  <TableCell className="text-right">
+                    <Button variant="ghost" size="sm" asChild>
+                      <Link href={`/customers/${customer.id}`}>
+                        {t('view')}
+                      </Link>
+                    </Button>
+                  </TableCell>
+                </TableRow>
               ))
             )}
-          </tbody>
-        </table>
+          </TableBody>
+        </Table>
       </div>
     </div>
   )

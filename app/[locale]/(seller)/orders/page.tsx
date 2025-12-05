@@ -5,6 +5,16 @@ import { authenticatedFetch } from '@/lib/api'
 import { Link } from '@/i18n/routing'
 import { useTranslations } from 'next-intl'
 import { LoadingPage } from '@/components/ui/loading-spinner'
+import { Badge } from '@/components/ui/badge'
+import { Button } from '@/components/ui/button'
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '@/components/ui/table'
 
 interface Order {
   id: string
@@ -55,99 +65,85 @@ export default function OrdersPage() {
   }
 
   return (
-    <div>
-      <h1 className="text-2xl font-bold mb-6">{t('title')}</h1>
+    <div className="space-y-6">
+      <div>
+        <h1 className="text-3xl font-bold tracking-tight">{t('title')}</h1>
+        <p className="text-muted-foreground mt-1">
+          View and manage all customer orders
+        </p>
+      </div>
 
-      <div className="bg-white rounded-lg shadow overflow-hidden">
-        <table className="min-w-full divide-y divide-gray-200">
-          <thead className="bg-gray-50">
-            <tr>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                {t('table.time')}
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                {t('table.buyerName')}
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                {t('table.product')}
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                {t('table.size')}
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                {t('table.paymentStatus')}
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                {t('table.deliveryStatus')}
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                {t('table.actions')}
-              </th>
-            </tr>
-          </thead>
-          <tbody className="bg-white divide-y divide-gray-200">
+      <div className="rounded-xl border bg-card">
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead>{t('table.time')}</TableHead>
+              <TableHead>{t('table.buyerName')}</TableHead>
+              <TableHead>{t('table.product')}</TableHead>
+              <TableHead>{t('table.size')}</TableHead>
+              <TableHead>{t('table.paymentStatus')}</TableHead>
+              <TableHead>{t('table.deliveryStatus')}</TableHead>
+              <TableHead className="text-right">{t('table.actions')}</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
             {orders.length === 0 ? (
-              <tr>
-                <td colSpan={7} className="px-6 py-4 text-center text-gray-500">
-                  {t('noOrders')}
-                </td>
-              </tr>
+              <TableRow>
+                <TableCell colSpan={7} className="h-24 text-center">
+                  <p className="text-muted-foreground">{t('noOrders')}</p>
+                </TableCell>
+              </TableRow>
             ) : (
               orders.map((order) => (
-                <tr key={order.id}>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                <TableRow key={order.id}>
+                  <TableCell className="text-muted-foreground">
                     {new Date(order.createdAt).toLocaleString()}
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                  </TableCell>
+                  <TableCell className="font-medium">
                     {order.contactSnapshot.fullName}
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                    {order.checkoutLink.name}
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                    <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-blue-100 text-blue-800">
-                      {order.selectedSize}
-                    </span>
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    <span
-                      className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${
+                  </TableCell>
+                  <TableCell>{order.checkoutLink.name}</TableCell>
+                  <TableCell>
+                    <Badge variant="secondary">{order.selectedSize}</Badge>
+                  </TableCell>
+                  <TableCell>
+                    <Badge
+                      variant={
                         order.paymentStatus === 'paid'
-                          ? 'bg-green-100 text-green-800'
+                          ? 'default'
                           : order.paymentStatus === 'cancelled'
-                          ? 'bg-red-100 text-red-800'
-                          : 'bg-yellow-100 text-yellow-800'
-                      }`}
+                          ? 'destructive'
+                          : 'secondary'
+                      }
                     >
                       {t(`statuses.${order.paymentStatus}`)}
-                    </span>
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    <span
-                      className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${
+                    </Badge>
+                  </TableCell>
+                  <TableCell>
+                    <Badge
+                      variant={
                         order.deliveryStatus === 'delivered'
-                          ? 'bg-green-100 text-green-800'
+                          ? 'default'
                           : order.deliveryStatus === 'sent'
-                          ? 'bg-blue-100 text-blue-800'
-                          : 'bg-gray-100 text-gray-800'
-                      }`}
+                          ? 'secondary'
+                          : 'outline'
+                      }
                     >
                       {t(`statuses.${order.deliveryStatus}`)}
-                    </span>
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                    <Link
-                      href={`/orders/${order.id}`}
-                      className="text-blue-600 hover:text-blue-900"
-                    >
-                      {t('table.view')}
-                    </Link>
-                  </td>
-                </tr>
+                    </Badge>
+                  </TableCell>
+                  <TableCell className="text-right">
+                    <Button variant="ghost" size="sm" asChild>
+                      <Link href={`/orders/${order.id}`}>
+                        {t('table.view')}
+                      </Link>
+                    </Button>
+                  </TableCell>
+                </TableRow>
               ))
             )}
-          </tbody>
-        </table>
+          </TableBody>
+        </Table>
       </div>
     </div>
   )
