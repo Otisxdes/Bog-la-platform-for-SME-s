@@ -162,7 +162,7 @@ export default function CheckoutLinksPage() {
                           className="text-blue-600 hover:text-blue-900 inline-flex items-center gap-1"
                         >
                           <ExternalLink className="h-4 w-4" />
-                          Preview
+                          {t('preview')}
                         </a>
                         <span className="text-gray-300">|</span>
                         <button
@@ -172,12 +172,12 @@ export default function CheckoutLinksPage() {
                           {copiedId === link.id ? (
                             <>
                               <Check className="h-4 w-4 text-green-600" />
-                              <span className="text-green-600">Copied!</span>
+                              <span className="text-green-600">{t('copied')}</span>
                             </>
                           ) : (
                             <>
                               <Copy className="h-4 w-4" />
-                              Copy Link
+                              {t('copyLink')}
                             </>
                           )}
                         </button>

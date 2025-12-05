@@ -84,6 +84,11 @@
     "delete": "O'chirish",
     "deleteConfirm": "Bu havolani o'chirishga ishonchingiz komilmi? Bu amalni qaytarib bo'lmaydi.",
     "deleting": "O'chirilmoqda...",
+    "preview": "Ko'rib chiqish",
+    "copyLink": "Havolani nusxalash",
+    "copied": "Nusxalandi!",
+    "editTitle": "To'lov havolasini tahrirlash",
+    "addAnotherSize": "Yana o'lcham qo'shish",
     "create": {
       "title": "To'lov havolasini yaratish",
       "productName": "Mahsulot nomi",

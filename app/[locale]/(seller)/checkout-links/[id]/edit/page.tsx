@@ -122,7 +122,7 @@ export default function EditCheckoutLinkPage({
 
   return (
     <div>
-      <h1 className="text-2xl font-bold mb-6">Edit Checkout Link</h1>
+      <h1 className="text-2xl font-bold mb-6">{t('checkoutLinks.editTitle')}</h1>
 
       {error && (
         <div className="bg-red-50 border border-red-200 rounded-md p-4 mb-6">
@@ -175,7 +175,7 @@ export default function EditCheckoutLinkPage({
               onClick={() => append('')}
               className="text-sm text-blue-600 hover:text-blue-700 font-medium"
             >
-              + Add another size
+              + {t('checkoutLinks.addAnotherSize')}
             </button>
           </div>
           {errors.sizes && (

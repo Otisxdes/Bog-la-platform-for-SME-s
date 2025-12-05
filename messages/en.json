@@ -84,6 +84,11 @@
     "delete": "Delete",
     "deleteConfirm": "Are you sure you want to delete this checkout link? This action cannot be undone.",
     "deleting": "Deleting...",
+    "preview": "Preview",
+    "copyLink": "Copy Link",
+    "copied": "Copied!",
+    "editTitle": "Edit Checkout Link",
+    "addAnotherSize": "Add another size",
     "create": {
       "title": "Create Checkout Link",
       "productName": "Product Name",

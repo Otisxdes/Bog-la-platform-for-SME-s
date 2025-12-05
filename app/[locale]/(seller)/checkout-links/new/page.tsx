@@ -134,7 +134,7 @@ export default function NewCheckoutLinkPage() {
               onClick={() => append('')}
               className="text-sm text-blue-600 hover:text-blue-700 font-medium"
             >
-              + Add another size
+              + {t('checkoutLinks.addAnotherSize')}
             </button>
           </div>
           {errors.sizes && (

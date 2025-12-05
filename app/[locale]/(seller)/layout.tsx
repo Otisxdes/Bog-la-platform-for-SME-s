@@ -4,6 +4,7 @@ import { useEffect, useState, type ReactNode } from 'react'
 import { usePathname, useRouter, Link } from '@/i18n/routing'
 import { useTranslations } from 'next-intl'
 import { LanguageSwitcher } from '@/components/LanguageSwitcher'
+import { LoadingPage } from '@/components/ui/loading-spinner'
 
 interface SellerData {
   id: string
@@ -58,11 +59,7 @@ export default function SellerLayout({ children }: { children: ReactNode }) {
 
   // Other pages - wait for mount and auth check
   if (!mounted) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-gray-900"></div>
-      </div>
-    )
+    return <LoadingPage />
   }
 
   // Not authenticated
