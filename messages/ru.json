@@ -235,6 +235,7 @@
   "buyer": {
     "checkout": {
       "title": "Оформление заказа",
+      "loading": "Загрузка...",
       "productDetails": "Детали товара",
       "price": "Цена",
       "selectSize": "Выберите размер",

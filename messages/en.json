@@ -235,6 +235,7 @@
   "buyer": {
     "checkout": {
       "title": "Checkout",
+      "loading": "Loading...",
       "productDetails": "Product Details",
       "price": "Price",
       "selectSize": "Select Size",
