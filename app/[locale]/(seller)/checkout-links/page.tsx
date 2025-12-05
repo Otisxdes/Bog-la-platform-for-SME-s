@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 import { authenticatedFetch } from '@/lib/api'
 import { Link } from '@/i18n/routing'
 import { useTranslations } from 'next-intl'
-import { Pencil, Trash2 } from 'lucide-react'
+import { Pencil, Trash2, ExternalLink, Copy, Check } from 'lucide-react'
 
 interface CheckoutLink {
   id: string
@@ -24,6 +24,7 @@ export default function CheckoutLinksPage() {
   const [error, setError] = useState<string | null>(null)
   const [sellerSlug, setSellerSlug] = useState<string>('')
   const [deleting, setDeleting] = useState<string | null>(null)
+  const [copiedId, setCopiedId] = useState<string | null>(null)
 
   useEffect(() => {
     async function fetchLinks() {
@@ -67,6 +68,13 @@ export default function CheckoutLinksPage() {
     } finally {
       setDeleting(null)
     }
+  }
+
+  const handleCopyLink = (slug: string, id: string) => {
+    const fullUrl = `${window.location.origin}/b/${sellerSlug}/${slug}`
+    navigator.clipboard.writeText(fullUrl)
+    setCopiedId(id)
+    setTimeout(() => setCopiedId(null), 2000)
   }
 
   if (loading) {
@@ -149,14 +157,33 @@ export default function CheckoutLinksPage() {
                       </div>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                      <a
-                        href={`/b/${sellerSlug}/${link.slug}`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-blue-600 hover:text-blue-900"
-                      >
-                        /b/{sellerSlug}/{link.slug}
-                      </a>
+                      <div className="flex items-center gap-2">
+                        <a
+                          href={`/b/${sellerSlug}/${link.slug}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-blue-600 hover:text-blue-900 inline-flex items-center gap-1"
+                        >
+                          <ExternalLink className="h-4 w-4" />
+                          Preview
+                        </a>
+                        <button
+                          onClick={() => handleCopyLink(link.slug, link.id)}
+                          className="text-gray-600 hover:text-gray-900 inline-flex items-center gap-1"
+                        >
+                          {copiedId === link.id ? (
+                            <>
+                              <Check className="h-4 w-4 text-green-600" />
+                              <span className="text-green-600">Copied!</span>
+                            </>
+                          ) : (
+                            <>
+                              <Copy className="h-4 w-4" />
+                              Copy Link
+                            </>
+                          )}
+                        </button>
+                      </div>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                       {new Date(link.createdAt).toLocaleDateString()}
