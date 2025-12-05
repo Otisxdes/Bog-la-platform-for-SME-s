@@ -5,6 +5,7 @@ import { authenticatedFetch } from '@/lib/api'
 import { Link } from '@/i18n/routing'
 import { useTranslations } from 'next-intl'
 import { Pencil, Trash2, ExternalLink, Copy, Check } from 'lucide-react'
+import { LoadingPage } from '@/components/ui/loading-spinner'
 
 interface CheckoutLink {
   id: string
@@ -78,11 +79,7 @@ export default function CheckoutLinksPage() {
   }
 
   if (loading) {
-    return (
-      <div className="flex items-center justify-center h-64">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-gray-900"></div>
-      </div>
-    )
+    return <LoadingPage />
   }
 
   if (error) {
@@ -157,7 +154,7 @@ export default function CheckoutLinksPage() {
                       </div>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                      <div className="flex items-center gap-2">
+                      <div className="flex items-center gap-3">
                         <a
                           href={`/b/${sellerSlug}/${link.slug}`}
                           target="_blank"
@@ -167,6 +164,7 @@ export default function CheckoutLinksPage() {
                           <ExternalLink className="h-4 w-4" />
                           Preview
                         </a>
+                        <span className="text-gray-300">|</span>
                         <button
                           onClick={() => handleCopyLink(link.slug, link.id)}
                           className="text-gray-600 hover:text-gray-900 inline-flex items-center gap-1"
@@ -192,7 +190,7 @@ export default function CheckoutLinksPage() {
                       {link._count.orders}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                      <div className="flex items-center gap-2">
+                      <div className="flex items-center gap-3">
                         <Link
                           href={`/checkout-links/${link.id}/edit`}
                           className="text-blue-600 hover:text-blue-900 inline-flex items-center gap-1"
@@ -200,6 +198,7 @@ export default function CheckoutLinksPage() {
                           <Pencil className="h-4 w-4" />
                           {t('edit')}
                         </Link>
+                        <span className="text-gray-300">|</span>
                         <button
                           onClick={() => handleDelete(link.id, link.name)}
                           disabled={deleting === link.id}

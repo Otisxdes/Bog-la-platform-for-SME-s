@@ -8,6 +8,7 @@ import { useTranslations } from 'next-intl'
 import { createCheckoutLinkSchema } from '@/lib/validations'
 import { authenticatedFetch } from '@/lib/api'
 import type { CreateCheckoutLinkInput } from '@/lib/validations'
+import { LoadingPage } from '@/components/ui/loading-spinner'
 
 export default function EditCheckoutLinkPage({
   params,
@@ -116,11 +117,7 @@ export default function EditCheckoutLinkPage({
   }
 
   if (fetching) {
-    return (
-      <div className="flex items-center justify-center h-64">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-gray-900"></div>
-      </div>
-    )
+    return <LoadingPage />
   }
 
   return (
@@ -326,7 +323,7 @@ export default function EditCheckoutLinkPage({
           </button>
           <button
             type="button"
-            onClick={() => router.back()}
+            onClick={() => router.push('/checkout-links')}
             className="bg-gray-200 text-gray-800 px-6 py-2 rounded-md font-medium hover:bg-gray-300"
           >
             {t('common.cancel')}
