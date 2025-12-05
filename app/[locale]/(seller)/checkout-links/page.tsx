@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import { authenticatedFetch } from '@/lib/api'
 import { Link } from '@/i18n/routing'
 import { useTranslations } from 'next-intl'
+import { Pencil, Trash2 } from 'lucide-react'
 
 interface CheckoutLink {
   id: string
@@ -22,6 +23,7 @@ export default function CheckoutLinksPage() {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
   const [sellerSlug, setSellerSlug] = useState<string>('')
+  const [deleting, setDeleting] = useState<string | null>(null)
 
   useEffect(() => {
     async function fetchLinks() {
@@ -44,6 +46,28 @@ export default function CheckoutLinksPage() {
     }
     fetchLinks()
   }, [])
+
+  const handleDelete = async (id: string, name: string) => {
+    if (!confirm(t('deleteConfirm'))) {
+      return
+    }
+
+    setDeleting(id)
+    try {
+      const response = await authenticatedFetch(`/api/checkout-links/${id}`, {
+        method: 'DELETE',
+      })
+
+      if (!response.ok) throw new Error('Failed to delete')
+
+      // Remove from list
+      setLinks(links.filter(link => link.id !== id))
+    } catch (err) {
+      alert('Failed to delete checkout link')
+    } finally {
+      setDeleting(null)
+    }
+  }
 
   if (loading) {
     return (
@@ -92,12 +116,15 @@ export default function CheckoutLinksPage() {
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 {t('table.ordersCount')}
               </th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                {t('table.actions')}
+              </th>
             </tr>
           </thead>
           <tbody className="bg-white divide-y divide-gray-200">
             {links.length === 0 ? (
               <tr>
-                <td colSpan={5} className="px-6 py-4 text-center text-gray-500">
+                <td colSpan={6} className="px-6 py-4 text-center text-gray-500">
                   {t('noLinks')}
                 </td>
               </tr>
@@ -136,6 +163,25 @@ export default function CheckoutLinksPage() {
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                       {link._count.orders}
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                      <div className="flex items-center gap-2">
+                        <Link
+                          href={`/checkout-links/${link.id}/edit`}
+                          className="text-blue-600 hover:text-blue-900 inline-flex items-center gap-1"
+                        >
+                          <Pencil className="h-4 w-4" />
+                          {t('edit')}
+                        </Link>
+                        <button
+                          onClick={() => handleDelete(link.id, link.name)}
+                          disabled={deleting === link.id}
+                          className="text-red-600 hover:text-red-900 inline-flex items-center gap-1 disabled:opacity-50"
+                        >
+                          <Trash2 className="h-4 w-4" />
+                          {deleting === link.id ? t('deleting') : t('delete')}
+                        </button>
+                      </div>
                     </td>
                   </tr>
                 )

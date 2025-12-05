@@ -77,8 +77,13 @@
       "sizes": "Sizes",
       "url": "URL",
       "createdDate": "Created Date",
-      "ordersCount": "Orders Count"
+      "ordersCount": "Orders Count",
+      "actions": "Actions"
     },
+    "edit": "Edit",
+    "delete": "Delete",
+    "deleteConfirm": "Are you sure you want to delete this checkout link? This action cannot be undone.",
+    "deleting": "Deleting...",
     "create": {
       "title": "Create Checkout Link",
       "productName": "Product Name",

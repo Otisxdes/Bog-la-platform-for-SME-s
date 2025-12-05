@@ -77,8 +77,13 @@
       "sizes": "O'lchamlar",
       "url": "URL",
       "createdDate": "Yaratilgan sana",
-      "ordersCount": "Buyurtmalar soni"
+      "ordersCount": "Buyurtmalar soni",
+      "actions": "Amallar"
     },
+    "edit": "Tahrirlash",
+    "delete": "O'chirish",
+    "deleteConfirm": "Bu havolani o'chirishga ishonchingiz komilmi? Bu amalni qaytarib bo'lmaydi.",
+    "deleting": "O'chirilmoqda...",
     "create": {
       "title": "To'lov havolasini yaratish",
       "productName": "Mahsulot nomi",
