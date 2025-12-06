@@ -96,6 +96,13 @@
     "addAnotherSize": "Yana o'lcham qo'shish",
     "create": {
       "title": "To'lov havolasini yaratish",
+      "subtitle": "Mahsulotingiz uchun yangi to'lov havolasini yarating",
+      "productDetailsTitle": "Mahsulot tafsilotlari",
+      "productDetailsDesc": "Mahsulotingiz haqida asosiy ma'lumotlarni kiriting",
+      "pricingTitle": "Narx va miqdor",
+      "pricingDesc": "Narx va miqdor chegaralarini belgilang",
+      "deliveryPaymentTitle": "Yetkazib berish va to'lov",
+      "deliveryPaymentDesc": "Yetkazib berish variantlari va to'lov ko'rsatmalarini sozlang",
       "productName": "Mahsulot nomi",
       "productNamePlaceholder": "Masalan: Yozgi futbolka",
       "size": "O'lcham",

@@ -96,6 +96,13 @@
     "addAnotherSize": "Добавить ещё размер",
     "create": {
       "title": "Создать ссылку на оплату",
+      "subtitle": "Создайте новую ссылку на оплату для вашего продукта",
+      "productDetailsTitle": "Детали продукта",
+      "productDetailsDesc": "Введите основную информацию о вашем продукте",
+      "pricingTitle": "Цена и количество",
+      "pricingDesc": "Установите цену и лимиты количества",
+      "deliveryPaymentTitle": "Доставка и оплата",
+      "deliveryPaymentDesc": "Настройте варианты доставки и инструкции по оплате",
       "productName": "Название товара",
       "productNamePlaceholder": "Например: Летняя футболка",
       "size": "Размер",

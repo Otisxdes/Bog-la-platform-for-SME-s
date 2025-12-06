@@ -96,6 +96,13 @@
     "addAnotherSize": "Add another size",
     "create": {
       "title": "Create Checkout Link",
+      "subtitle": "Create a new payment link for your product",
+      "productDetailsTitle": "Product Details",
+      "productDetailsDesc": "Enter basic information about your product",
+      "pricingTitle": "Pricing & Quantity",
+      "pricingDesc": "Set price and quantity limits",
+      "deliveryPaymentTitle": "Delivery & Payment",
+      "deliveryPaymentDesc": "Configure delivery options and payment instructions",
       "productName": "Product Name",
       "productNamePlaceholder": "e.g. White Oversized Hoodie",
       "productImage": "Product Image URL (optional)",

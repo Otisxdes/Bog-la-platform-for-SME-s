@@ -128,17 +128,15 @@ export default function EditCheckoutLinkPage({
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center gap-4">
-        <Button variant="ghost" size="sm" onClick={() => router.push('/checkout-links')}>
-          <ArrowLeft className="h-4 w-4 mr-2" />
-          {t('common.back')}
-        </Button>
-        <div>
-          <h1 className="text-3xl font-bold tracking-tight">{t('checkoutLinks.editTitle')}</h1>
-          <p className="text-sm text-muted-foreground mt-1">
-            Update payment link details
-          </p>
-        </div>
+      <Button variant="ghost" size="sm" onClick={() => router.push('/checkout-links')}>
+        <ArrowLeft className="h-4 w-4 mr-2" />
+        {t('common.back')}
+      </Button>
+      <div>
+        <h1 className="text-3xl font-bold tracking-tight">{t('checkoutLinks.editTitle')}</h1>
+        <p className="text-sm text-muted-foreground mt-1">
+          {t('checkoutLinks.create.subtitle')}
+        </p>
       </div>
 
       {error && (
@@ -150,8 +148,8 @@ export default function EditCheckoutLinkPage({
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
         <Card>
           <CardHeader>
-            <CardTitle>Product Details</CardTitle>
-            <CardDescription>Enter basic information about your product</CardDescription>
+            <CardTitle>{t('checkoutLinks.create.productDetailsTitle')}</CardTitle>
+            <CardDescription>{t('checkoutLinks.create.productDetailsDesc')}</CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
             <div className="space-y-2">
@@ -232,8 +230,8 @@ export default function EditCheckoutLinkPage({
 
         <Card>
           <CardHeader>
-            <CardTitle>Pricing & Quantity</CardTitle>
-            <CardDescription>Set price and quantity limits</CardDescription>
+            <CardTitle>{t('checkoutLinks.create.pricingTitle')}</CardTitle>
+            <CardDescription>{t('checkoutLinks.create.pricingDesc')}</CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
             <div className="grid gap-4 md:grid-cols-2">
@@ -288,8 +286,8 @@ export default function EditCheckoutLinkPage({
 
         <Card>
           <CardHeader>
-            <CardTitle>Delivery & Payment</CardTitle>
-            <CardDescription>Configure delivery options and payment instructions</CardDescription>
+            <CardTitle>{t('checkoutLinks.create.deliveryPaymentTitle')}</CardTitle>
+            <CardDescription>{t('checkoutLinks.create.deliveryPaymentDesc')}</CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
             <div className="space-y-3">
