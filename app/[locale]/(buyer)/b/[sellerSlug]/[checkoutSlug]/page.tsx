@@ -125,13 +125,6 @@ export default function CheckoutPage({
         setCheckoutLink(data)
         setQuantity(data.defaultQty || 1)
         setValue('quantity', data.defaultQty || 1)
-
-        // Track visit
-        fetch(`/api/checkout-links/${params.sellerSlug}/${params.checkoutSlug}/visit`, {
-          method: 'POST',
-        }).catch(() => {
-          // Silently fail if visit tracking fails
-        })
       } catch (err) {
         setError(t('errors.loadFailed'))
         console.error(err)

@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 import { authenticatedFetch } from '@/lib/api'
 import { Link } from '@/i18n/routing'
 import { useTranslations } from 'next-intl'
-import { Pencil, Trash2, ExternalLink, Copy, Check, Plus, BarChart3 } from 'lucide-react'
+import { Pencil, Trash2, ExternalLink, Copy, Check, Plus } from 'lucide-react'
 import { LoadingPage } from '@/components/ui/loading-spinner'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
@@ -194,16 +194,6 @@ export default function CheckoutLinksPage() {
                     </TableCell>
                     <TableCell className="text-right">
                       <div className="flex items-center justify-end gap-2">
-                        <Button
-                          variant="ghost"
-                          size="sm"
-                          asChild
-                        >
-                          <Link href={`/checkout-links/${link.id}`}>
-                            <BarChart3 className="h-4 w-4 mr-1" />
-                            {t('viewAnalytics')}
-                          </Link>
-                        </Button>
                         <Button
                           variant="ghost"
                           size="sm"
