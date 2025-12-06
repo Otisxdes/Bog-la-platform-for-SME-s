@@ -76,3 +76,56 @@ export async function GET(
   }
 }
 
+// POST /api/checkout-links/[...slug] - Track visit to checkout page
+// slug format: ["sellerSlug", "checkoutSlug", "visit"]
+export async function POST(
+  request: NextRequest,
+  { params }: { params: Promise<{ slug: string[] }> }
+) {
+  try {
+    const { slug } = await params
+
+    // Handle visit tracking
+    if (slug.length === 3 && slug[2] === 'visit') {
+      const [sellerSlug, checkoutSlug] = slug
+
+      // Find seller by slug
+      const seller = await prisma.seller.findUnique({
+        where: { slug: sellerSlug },
+      })
+
+      if (!seller) {
+        return NextResponse.json({ error: 'Seller not found' }, { status: 404 })
+      }
+
+      // Increment visit counter
+      await prisma.checkoutLink.update({
+        where: {
+          sellerId_slug: {
+            sellerId: seller.id,
+            slug: checkoutSlug,
+          },
+        },
+        data: {
+          visits: {
+            increment: 1,
+          },
+        },
+      })
+
+      return NextResponse.json({ success: true })
+    }
+
+    return NextResponse.json(
+      { error: 'Invalid endpoint' },
+      { status: 400 }
+    )
+  } catch (error) {
+    console.error('Error tracking visit:', error)
+    return NextResponse.json(
+      { error: 'Failed to track visit' },
+      { status: 500 }
+    )
+  }
+}
+

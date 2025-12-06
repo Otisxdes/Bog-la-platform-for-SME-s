@@ -99,6 +99,7 @@
     "preview": "Предпросмотр",
     "copyLink": "Копировать ссылку",
     "copied": "Скопировано!",
+    "viewAnalytics": "Аналитика",
     "editTitle": "Редактировать ссылку на оплату",
     "addAnotherSize": "Добавить ещё размер",
     "create": {
@@ -130,6 +131,24 @@
       "paymentNotePlaceholder": "Например: Оплатите через Payme или Uzcard на карту: 8600 xxxx xxxx xxxx",
       "submit": "Создать ссылку",
       "submitting": "Создание..."
+    },
+    "detail": {
+      "subtitle": "Просмотр аналитики и показателей эффективности",
+      "totalVisits": "Всего просмотров",
+      "totalVisitsDesc": "Просмотры страницы покупателями",
+      "totalOrders": "Всего заказов",
+      "totalOrdersDesc": "Завершенные заказы",
+      "conversionRate": "Конверсия",
+      "conversionRateDesc": "Заказы из просмотров",
+      "stockRemaining": "Остаток на складе",
+      "stockRemainingDesc": "Доступный запас",
+      "unlimited": "Неограниченно",
+      "productInfo": "Информация о продукте",
+      "productInfoDesc": "Основные данные о продукте",
+      "productName": "Название товара",
+      "price": "Цена",
+      "slug": "URL-идентификатор",
+      "viewCheckout": "Посмотреть страницу оформления"
     }
   },
   "orders": {

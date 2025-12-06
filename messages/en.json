@@ -99,6 +99,7 @@
     "preview": "Preview",
     "copyLink": "Copy Link",
     "copied": "Copied!",
+    "viewAnalytics": "Analytics",
     "editTitle": "Edit Checkout Link",
     "addAnotherSize": "Add another size",
     "create": {
@@ -130,6 +131,24 @@
       "paymentNotePlaceholder": "e.g. Pay via Payme or Uzcard to this card: 8600 xxxx xxxx xxxx",
       "submit": "Create Checkout Link",
       "submitting": "Creating..."
+    },
+    "detail": {
+      "subtitle": "View analytics and performance metrics",
+      "totalVisits": "Total Visits",
+      "totalVisitsDesc": "Page views from buyers",
+      "totalOrders": "Total Orders",
+      "totalOrdersDesc": "Completed orders",
+      "conversionRate": "Conversion Rate",
+      "conversionRateDesc": "Orders from visits",
+      "stockRemaining": "Stock Remaining",
+      "stockRemainingDesc": "Available inventory",
+      "unlimited": "Unlimited",
+      "productInfo": "Product Information",
+      "productInfoDesc": "Basic product details",
+      "productName": "Product Name",
+      "price": "Price",
+      "slug": "URL Slug",
+      "viewCheckout": "View Checkout Page"
     }
   },
   "orders": {

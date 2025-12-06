@@ -99,6 +99,7 @@
     "preview": "Ko'rib chiqish",
     "copyLink": "Havolani nusxalash",
     "copied": "Nusxalandi!",
+    "viewAnalytics": "Analitika",
     "editTitle": "To'lov havolasini tahrirlash",
     "addAnotherSize": "Yana o'lcham qo'shish",
     "create": {
@@ -130,6 +131,24 @@
       "paymentNotePlaceholder": "Masalan: Payme yoki Uzcard orqali ushbu kartaga to'lang: 8600 xxxx xxxx xxxx",
       "submit": "Havola yaratish",
       "submitting": "Yaratilmoqda..."
+    },
+    "detail": {
+      "subtitle": "Analitika va ishlash ko'rsatkichlarini ko'ring",
+      "totalVisits": "Jami ko'rishlar",
+      "totalVisitsDesc": "Xaridorlarning sahifa ko'rishlari",
+      "totalOrders": "Jami buyurtmalar",
+      "totalOrdersDesc": "Bajarilgan buyurtmalar",
+      "conversionRate": "Konversiya",
+      "conversionRateDesc": "Ko'rishlardan buyurtmalar",
+      "stockRemaining": "Qolgan zaxira",
+      "stockRemainingDesc": "Mavjud zaxira",
+      "unlimited": "Cheklanmagan",
+      "productInfo": "Mahsulot ma'lumotlari",
+      "productInfoDesc": "Asosiy mahsulot ma'lumotlari",
+      "productName": "Mahsulot nomi",
+      "price": "Narx",
+      "slug": "URL identifikatori",
+      "viewCheckout": "Buyurtma sahifasini ko'rish"
     }
   },
   "orders": {
