@@ -6,6 +6,7 @@ import { Link } from '@/i18n/routing'
 import { useTranslations } from 'next-intl'
 import { LoadingPage } from '@/components/ui/loading-spinner'
 import { TrendingUp, TrendingDown, Users, ShoppingBag, Calendar } from 'lucide-react'
+import { OrdersChart } from '@/components/charts/orders-chart'
 
 interface Stats {
   todayOrders: number
@@ -32,6 +33,7 @@ export default function DashboardPage() {
   const [orders, setOrders] = useState<Order[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
+  const [chartData, setChartData] = useState<{ date: string; orders: number }[]>([])
 
   useEffect(() => {
     async function fetchData() {
@@ -61,6 +63,31 @@ export default function DashboardPage() {
         })
 
         setOrders(ordersData.orders)
+
+        // Generate chart data from orders
+        const last90Days = new Date()
+        last90Days.setDate(last90Days.getDate() - 90)
+
+        // Group orders by date
+        const ordersByDate: Record<string, number> = {}
+        ordersData.orders.forEach((order: Order) => {
+          const date = new Date(order.createdAt).toISOString().split('T')[0]
+          ordersByDate[date] = (ordersByDate[date] || 0) + 1
+        })
+
+        // Fill in missing dates with 0
+        const data: { date: string; orders: number }[] = []
+        for (let i = 90; i >= 0; i--) {
+          const date = new Date()
+          date.setDate(date.getDate() - i)
+          const dateStr = date.toISOString().split('T')[0]
+          data.push({
+            date: dateStr,
+            orders: ordersByDate[dateStr] || 0
+          })
+        }
+
+        setChartData(data)
       } catch (err: any) {
         setError(err.message || 'Failed to load dashboard data')
       } finally {
@@ -141,6 +168,16 @@ export default function DashboardPage() {
           </div>
         </div>
       </div>
+
+      {/* Orders Chart */}
+      <OrdersChart
+        data={chartData}
+        title={t('ordersChart.title')}
+        subtitle={t('ordersChart.subtitle')}
+        last7Days={t('ordersChart.last7Days')}
+        last30Days={t('ordersChart.last30Days')}
+        last3Months={t('ordersChart.last3Months')}
+      />
 
       {/* Latest Orders */}
       <div className="rounded-xl border bg-card shadow-sm">

@@ -66,7 +66,14 @@
     "totalCustomersSubtitle": "Зарегистрированные клиенты",
     "latestOrders": "Последние заказы",
     "latestOrdersSubtitle": "Недавние заказы от ваших клиентов",
-    "noOrders": "Пока нет заказов"
+    "noOrders": "Пока нет заказов",
+    "ordersChart": {
+      "title": "Обзор заказов",
+      "subtitle": "Отслеживайте тенденции заказов с течением времени",
+      "last7Days": "Последние 7 дней",
+      "last30Days": "Последние 30 дней",
+      "last3Months": "Последние 3 месяца"
+    }
   },
   "checkoutLinks": {
     "title": "Ссылки на оплату",

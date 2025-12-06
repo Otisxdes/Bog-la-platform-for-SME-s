@@ -66,7 +66,14 @@
     "totalCustomersSubtitle": "Ro'yxatdan o'tgan mijozlar",
     "latestOrders": "So'nggi buyurtmalar",
     "latestOrdersSubtitle": "Mijozlaringizdan so'nggi buyurtmalar",
-    "noOrders": "Hali buyurtmalar yo'q"
+    "noOrders": "Hali buyurtmalar yo'q",
+    "ordersChart": {
+      "title": "Buyurtmalar ko'rinishi",
+      "subtitle": "Buyurtmalarning o'zgarishini kuzatib boring",
+      "last7Days": "So'nggi 7 kun",
+      "last30Days": "So'nggi 30 kun",
+      "last3Months": "So'nggi 3 oy"
+    }
   },
   "checkoutLinks": {
     "title": "To'lov havolalari",
