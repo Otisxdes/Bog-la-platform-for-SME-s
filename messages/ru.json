@@ -46,14 +46,14 @@
   "login": {
     "title": "Добро пожаловать в Bog'la",
     "subtitle": "Войдите, чтобы управлять ссылками и заказами",
-    "email": "Email",
+    "email": "Эл. почта",
     "emailPlaceholder": "seller@example.com",
     "password": "Пароль",
     "passwordPlaceholder": "••••••••",
     "submit": "Войти",
     "submitting": "Входим...",
     "demoCredentials": "Демо данные",
-    "error": "Неверный email или пароль"
+    "error": "Неверная эл. почта или пароль"
   },
   "dashboard": {
     "title": "Обзор",
@@ -77,6 +77,7 @@
   },
   "checkoutLinks": {
     "title": "Ссылки на оплату",
+    "subtitle": "Создавайте и управляйте платежными ссылками для ваших товаров",
     "new": "Новая ссылка",
     "newButton": "Новая ссылка",
     "name": "Название",
@@ -297,8 +298,8 @@
       "fullNamePlaceholder": "Введите ваше полное имя",
       "phone": "Номер телефона",
       "phonePlaceholder": "+998XXXXXXXXX",
-      "telegram": "Telegram username (необязательно)",
-      "telegramPlaceholder": "@username",
+      "telegram": "Имя пользователя Telegram (необязательно)",
+      "telegramPlaceholder": "@имя_пользователя",
       "city": "Город",
       "selectCity": "Выберите город",
       "address": "Адрес доставки",
@@ -330,6 +331,8 @@
   "success": {
     "title": "Заказ отправлен {sellerName}",
     "subtitle": "Ваш заказ получен. Пожалуйста, оплатите для продолжения.",
+    "orderNotFound": "Заказ не найден",
+    "backToCheckout": "Назад к оформлению",
     "orderSummary": "Детали заказа",
     "product": "Товар",
     "size": "Размер",
@@ -337,13 +340,22 @@
     "unitPrice": "Цена за единицу",
     "total": "Итого",
     "deliveryMethod": "Способ доставки",
+    "phone": "Телефон",
+    "address": "Адрес",
     "contact": "Контакт",
     "paymentInstructions": "Инструкции по оплате",
     "copyCard": "Скопировать номер карты",
+    "copyPaymentDetails": "Скопировать данные оплаты",
     "copied": "Скопировано!",
+    "contactInstagram": "Связаться с продавцом в Instagram",
     "openInstagram": "Открыть Instagram DM продавца",
     "createAnother": "Создать еще один заказ",
-    "sellerNote": "Продавец подтвердит оплату и свяжется с вами по телефону или в DM."
+    "sellerNote": "Продавец подтвердит оплату и свяжется с вами по телефону или в DM.",
+    "deliveryMethods": {
+      "courierCity": "Курьер по городу",
+      "pickup": "Самовывоз",
+      "regionDelivery": "Доставка по регионам"
+    }
   },
   "cities": {
     "Tashkent": "Ташкент",
@@ -365,7 +377,7 @@
   },
   "validation": {
     "required": "Это поле обязательно",
-    "invalidEmail": "Неверный email адрес",
+    "invalidEmail": "Неверный адрес электронной почты",
     "invalidPhone": "Неверный формат узбекского номера (+998XXXXXXXXX)"
   }
 }

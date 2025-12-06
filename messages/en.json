@@ -77,6 +77,7 @@
   },
   "checkoutLinks": {
     "title": "Checkout Links",
+    "subtitle": "Create and manage payment links for your products",
     "new": "New Checkout Link",
     "newButton": "New Checkout Link",
     "name": "Name",
@@ -330,6 +331,8 @@
   "success": {
     "title": "Order sent to {sellerName}",
     "subtitle": "Your order has been received. Please complete payment to proceed.",
+    "orderNotFound": "Order not found",
+    "backToCheckout": "Back to checkout",
     "orderSummary": "Order Summary",
     "product": "Product",
     "size": "Size",
@@ -337,13 +340,22 @@
     "unitPrice": "Unit Price",
     "total": "Total",
     "deliveryMethod": "Delivery Method",
+    "phone": "Phone",
+    "address": "Address",
     "contact": "Contact",
     "paymentInstructions": "Payment Instructions",
     "copyCard": "Copy Card Number",
+    "copyPaymentDetails": "Copy Payment Details",
     "copied": "Copied!",
+    "contactInstagram": "Contact seller on Instagram",
     "openInstagram": "Open Instagram DM with seller",
     "createAnother": "Create another order",
-    "sellerNote": "Seller will confirm your payment and contact you by phone or DM."
+    "sellerNote": "Seller will confirm your payment and contact you by phone or DM.",
+    "deliveryMethods": {
+      "courierCity": "Courier within city",
+      "pickup": "Pickup",
+      "regionDelivery": "Region delivery"
+    }
   },
   "cities": {
     "Tashkent": "Tashkent",

@@ -46,14 +46,14 @@
   "login": {
     "title": "Bog'laga xush kelibsiz",
     "subtitle": "Havolalar va buyurtmalarni boshqarish uchun kiring",
-    "email": "Email",
+    "email": "Elektron pochta",
     "emailPlaceholder": "seller@example.com",
     "password": "Parol",
     "passwordPlaceholder": "••••••••",
     "submit": "Kirish",
     "submitting": "Kirilmoqda...",
     "demoCredentials": "Demo ma'lumotlar",
-    "error": "Email yoki parol noto'g'ri"
+    "error": "Elektron pochta yoki parol noto'g'ri"
   },
   "dashboard": {
     "title": "Umumiy ko'rinish",
@@ -77,6 +77,7 @@
   },
   "checkoutLinks": {
     "title": "To'lov havolalari",
+    "subtitle": "Mahsulotlaringiz uchun to'lov havolalarini yarating va boshqaring",
     "new": "Yangi havola",
     "newButton": "Yangi havola",
     "name": "Nomi",
@@ -297,8 +298,8 @@
       "fullNamePlaceholder": "To'liq ismingizni kiriting",
       "phone": "Telefon raqami",
       "phonePlaceholder": "+998XXXXXXXXX",
-      "telegram": "Telegram username (ixtiyoriy)",
-      "telegramPlaceholder": "@username",
+      "telegram": "Telegram foydalanuvchi nomi (ixtiyoriy)",
+      "telegramPlaceholder": "@foydalanuvchi",
       "city": "Shahar",
       "selectCity": "Shaharni tanlang",
       "address": "Yetkazib berish manzili",
@@ -330,6 +331,8 @@
   "success": {
     "title": "Buyurtma {sellerName}ga yuborildi",
     "subtitle": "Buyurtmangiz qabul qilindi. Davom etish uchun to'lovni amalga oshiring.",
+    "orderNotFound": "Buyurtma topilmadi",
+    "backToCheckout": "Buyurtmaga qaytish",
     "orderSummary": "Buyurtma tafsilotlari",
     "product": "Mahsulot",
     "size": "O'lcham",
@@ -337,13 +340,22 @@
     "unitPrice": "Birlik narxi",
     "total": "Jami",
     "deliveryMethod": "Yetkazib berish usuli",
+    "phone": "Telefon",
+    "address": "Manzil",
     "contact": "Aloqa",
     "paymentInstructions": "To'lov bo'yicha ko'rsatmalar",
     "copyCard": "Karta raqamini nusxalash",
+    "copyPaymentDetails": "To'lov ma'lumotlarini nusxalash",
     "copied": "Nusxalandi!",
+    "contactInstagram": "Sotuvchi bilan Instagram orqali bog'lanish",
     "openInstagram": "Sotuvchining Instagram DMini ochish",
     "createAnother": "Yana buyurtma yaratish",
-    "sellerNote": "Sotuvchi to'lovni tasdiqlaydi va siz bilan telefon yoki DM orqali bog'lanadi."
+    "sellerNote": "Sotuvchi to'lovni tasdiqlaydi va siz bilan telefon yoki DM orqali bog'lanadi.",
+    "deliveryMethods": {
+      "courierCity": "Shahar bo'ylab kuryer",
+      "pickup": "O'zim olib ketaman",
+      "regionDelivery": "Viloyatlarga yetkazib berish"
+    }
   },
   "cities": {
     "Tashkent": "Toshkent",
@@ -365,7 +377,7 @@
   },
   "validation": {
     "required": "Bu maydon majburiy",
-    "invalidEmail": "Email manzili noto'g'ri",
+    "invalidEmail": "Elektron pochta manzili noto'g'ri",
     "invalidPhone": "Noto'g'ri O'zbekiston telefon raqami formati (+998XXXXXXXXX)"
   }
 }
