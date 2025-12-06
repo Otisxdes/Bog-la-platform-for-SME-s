@@ -40,6 +40,13 @@ export function OrdersChart({
 
   const filteredData = getFilteredData()
 
+  // Calculate tick interval based on time range
+  const getTickInterval = () => {
+    if (timeRange === '7days') return 0 // Show all ticks
+    if (timeRange === '30days') return 2 // Show every 3rd tick
+    return 6 // Show every 7th tick for 3 months
+  }
+
   return (
     <Card>
       <CardHeader>
@@ -85,13 +92,17 @@ export function OrdersChart({
             <CartesianGrid strokeDasharray="3 3" className="stroke-muted" />
             <XAxis
               dataKey="date"
-              className="text-xs"
+              tick={{ fontSize: 12 }}
+              interval={getTickInterval()}
+              angle={timeRange === '3months' ? -15 : 0}
+              textAnchor={timeRange === '3months' ? 'end' : 'middle'}
+              height={timeRange === '3months' ? 60 : 50}
               tickFormatter={(value) => {
                 const date = new Date(value)
                 return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })
               }}
             />
-            <YAxis className="text-xs" />
+            <YAxis tick={{ fontSize: 12 }} />
             <Tooltip
               contentStyle={{
                 backgroundColor: 'hsl(var(--card))',
