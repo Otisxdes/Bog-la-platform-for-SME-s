@@ -94,9 +94,7 @@ export function OrdersChart({
               dataKey="date"
               tick={{ fontSize: 12 }}
               interval={getTickInterval()}
-              angle={timeRange === '3months' ? -15 : 0}
-              textAnchor={timeRange === '3months' ? 'end' : 'middle'}
-              height={timeRange === '3months' ? 60 : 50}
+              height={50}
               tickFormatter={(value) => {
                 const date = new Date(value)
                 return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })
