@@ -109,11 +109,14 @@ export default function OrdersPage() {
                   <TableCell>
                     <Badge
                       variant={
-                        order.paymentStatus === 'paid'
-                          ? 'default'
-                          : order.paymentStatus === 'cancelled'
+                        order.paymentStatus === 'cancelled'
                           ? 'destructive'
                           : 'secondary'
+                      }
+                      className={
+                        order.paymentStatus === 'paid'
+                          ? 'bg-green-600 text-white hover:bg-green-700'
+                          : ''
                       }
                     >
                       {t(`statuses.${order.paymentStatus}`)}
