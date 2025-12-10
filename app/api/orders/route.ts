@@ -168,3 +168,68 @@ export async function GET(request: NextRequest) {
   }
 }
 
+// PATCH /api/orders - Update order status (seller auth required)
+export async function PATCH(request: NextRequest) {
+  try {
+    const sellerId = getSellerIdFromRequest(request)
+    if (!sellerId) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+    }
+
+    const body = await request.json()
+    const { orderId, paymentStatus, deliveryStatus } = body
+
+    if (!orderId) {
+      return NextResponse.json(
+        { error: 'Order ID is required' },
+        { status: 400 }
+      )
+    }
+
+    // Verify order belongs to seller
+    const existingOrder = await prisma.order.findUnique({
+      where: { id: orderId },
+    })
+
+    if (!existingOrder) {
+      return NextResponse.json({ error: 'Order not found' }, { status: 404 })
+    }
+
+    if (existingOrder.sellerId !== sellerId) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 403 })
+    }
+
+    // Update order status
+    const updatedOrder = await prisma.order.update({
+      where: { id: orderId },
+      data: {
+        ...(paymentStatus && { paymentStatus }),
+        ...(deliveryStatus && { deliveryStatus }),
+      },
+      include: {
+        checkoutLink: {
+          select: {
+            id: true,
+            name: true,
+            currency: true,
+          },
+        },
+      },
+    })
+
+    // Parse contact snapshot
+    const orderWithParsedSnapshot = {
+      ...updatedOrder,
+      contactSnapshot: JSON.parse(updatedOrder.contactSnapshot),
+    }
+
+    return NextResponse.json(orderWithParsedSnapshot)
+  } catch (error) {
+    console.error('Error updating order:', error)
+    return NextResponse.json(
+      { error: 'Failed to update order' },
+      { status: 500 }
+    )
+  }
+}
+

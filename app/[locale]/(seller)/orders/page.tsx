@@ -133,7 +133,7 @@ export default function OrdersPage() {
                     </Badge>
                   </TableCell>
                   <TableCell className="text-right">
-                    <Button variant="ghost" size="sm" asChild>
+                    <Button variant="link" size="sm" asChild>
                       <Link href={`/orders/${order.id}`}>
                         {t('table.view')}
                       </Link>
