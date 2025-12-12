@@ -13,7 +13,7 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Textarea } from '@/components/ui/textarea'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { Plus, X, ArrowLeft } from 'lucide-react'
+import { Plus, X, ArrowLeft, Upload, ImageIcon } from 'lucide-react'
 
 export default function NewCheckoutLinkPage() {
   const router = useRouter()
@@ -21,6 +21,9 @@ export default function NewCheckoutLinkPage() {
   const t = useTranslations()
   const [error, setError] = useState<string | null>(null)
   const [loading, setLoading] = useState(false)
+  const [uploadedImageUrl, setUploadedImageUrl] = useState<string>('')
+  const [uploading, setUploading] = useState(false)
+  const [uploadError, setUploadError] = useState<string | null>(null)
 
   const {
     register,
@@ -50,6 +53,36 @@ export default function NewCheckoutLinkPage() {
 
   const deliveryOptions = watch('deliveryOptions')
 
+  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0]
+    if (!file) return
+
+    setUploading(true)
+    setUploadError(null)
+
+    try {
+      const formData = new FormData()
+      formData.append('file', file)
+
+      const response = await authenticatedFetch('/api/upload', {
+        method: 'POST',
+        body: formData,
+      })
+
+      if (!response.ok) {
+        const errorData = await response.json()
+        throw new Error(errorData.error || 'Failed to upload image')
+      }
+
+      const data = await response.json()
+      setUploadedImageUrl(data.url)
+    } catch (err: any) {
+      setUploadError(err.message || 'Failed to upload image')
+    } finally {
+      setUploading(false)
+    }
+  }
+
   const onSubmit = async (data: CreateCheckoutLinkInput) => {
     setLoading(true)
     setError(null)
@@ -60,7 +93,7 @@ export default function NewCheckoutLinkPage() {
         ...data,
         sizes: data.sizes.filter((size: string) => size.trim() !== ''),
         maxQty: isNaN(data.maxQty as any) ? undefined : data.maxQty,
-        imageUrl: data.imageUrl?.trim() || '',
+        imageUrl: uploadedImageUrl || '',
       }
 
       const response = await authenticatedFetch('/api/checkout-links', {
@@ -170,19 +203,53 @@ export default function NewCheckoutLinkPage() {
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="imageUrl">{t('checkoutLinks.create.productImage')}</Label>
-              <Input
-                id="imageUrl"
-                type="url"
-                {...register('imageUrl')}
-                placeholder={t('checkoutLinks.create.productImagePlaceholder')}
-              />
-              {errors.imageUrl && (
-                <p className="text-sm text-destructive">{errors.imageUrl.message}</p>
+              <Label htmlFor="imageFile">{t('checkoutLinks.create.productImage')}</Label>
+
+              {!uploadedImageUrl ? (
+                <div className="space-y-2">
+                  <div className="flex items-center gap-2">
+                    <Input
+                      id="imageFile"
+                      type="file"
+                      accept="image/jpeg,image/jpg,image/png,image/webp,image/gif"
+                      onChange={handleImageUpload}
+                      disabled={uploading}
+                      className="flex-1"
+                    />
+                    {uploading && (
+                      <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                        <div className="h-4 w-4 animate-spin rounded-full border-2 border-primary border-t-transparent" />
+                        Uploading...
+                      </div>
+                    )}
+                  </div>
+                  {uploadError && (
+                    <p className="text-sm text-destructive">{uploadError}</p>
+                  )}
+                  <p className="text-xs text-muted-foreground">
+                    Max 5MB. JPEG, PNG, WebP, or GIF.
+                  </p>
+                </div>
+              ) : (
+                <div className="space-y-2">
+                  <div className="relative aspect-square w-48 rounded-lg border overflow-hidden bg-muted">
+                    <img
+                      src={uploadedImageUrl}
+                      alt="Product preview"
+                      className="object-cover w-full h-full"
+                    />
+                  </div>
+                  <Button
+                    type="button"
+                    variant="outline"
+                    size="sm"
+                    onClick={() => setUploadedImageUrl('')}
+                  >
+                    <X className="h-4 w-4 mr-2" />
+                    Remove image
+                  </Button>
+                </div>
               )}
-              <p className="text-xs text-muted-foreground">
-                {t('checkoutLinks.create.productImageHelp')}
-              </p>
             </div>
           </CardContent>
         </Card>
